@@ -1,8 +1,8 @@
 interface UserInterface {
-    name: string,
+    name?: string,
     email: string,
     password: string,
-    role: string,
+    role?: string,
 }
 
 export default UserInterface;

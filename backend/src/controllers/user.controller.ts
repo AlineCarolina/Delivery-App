@@ -2,10 +2,15 @@ import { Request, Response } from "express";
 import UserService from "../services/user.service";
 
 export default class UserController {
+    public static async register(req: Request, res: Response) {
+        const { email, password, name, role = 'customer' } = req.body;
+        const { response, code } = await UserService.register({ email, password, name, role });
+        return res.status(code).json(response);
+    }
+
     public static async login(req: Request, res: Response) {
-        const user = await UserService.login( { ...req.body } );
-    return res
-        .status(200)
-        .json({ message: "user created", data: user })
+        const { email, password } = req.body;
+        const { response, code } = await UserService.login({ email, password });
+        return res.status(code).json(response);
     }
 }
