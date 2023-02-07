@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import statusCodes from "./statusCodes";
-import UserController from "./controllers/user.controller";
+import { statusCodes } from "./statusCodes";
+import route from "./routes";
 
 class App {
   public app: express.Express;
@@ -20,6 +20,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use(route)
   }
 
   public start(PORT: string | number): void {
@@ -29,7 +30,6 @@ class App {
     this.app.get('/', (_req: Request, res: Response) => {
       res.status(statusCodes.OK).send('Express + TypeScript');
     });
-    this.app.post('/login', UserController.login);
   }
 }
 
