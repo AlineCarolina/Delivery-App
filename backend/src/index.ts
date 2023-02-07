@@ -1,26 +1,36 @@
 import express, { Request, Response } from "express";
 import statusCodes from "./statusCodes";
-import connection from "./database/config";
-import login from "./controllers/user"
+import UserController from "./controllers/user.controller";
 
-const app = express();
+class App {
+  public app: express.Express;
 
-app.use(express.json());
+  constructor() {
+    this.app = express();
+    this.config();
+  }
 
-const PORT = 8000;
+  private config(): void {
+    const accessControl: express.RequestHandler = (_req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
+      res.header('Access-Control-Allow-Headers', '*');
+      next();
+    };
 
-connection.sync().then(() => {
-  console.log("Database synced successfully");
-}).catch((err) => {
-  console.log("Err", err);
-});
+    this.app.use(express.json());
+    this.app.use(accessControl);
+  }
 
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+  public start(PORT: string | number): void {
+    this.app.listen(PORT, () => {
+      console.log(`Server is running at http://localhost:${PORT}`);
+    });
+    this.app.get('/', (_req: Request, res: Response) => {
+      res.status(statusCodes.OK).send('Express + TypeScript');
+    });
+    this.app.post('/login', UserController.login);
+  }
+}
 
-app.get('/', (_req: Request, res: Response) => {
-  res.status(statusCodes.OK).send('Express + TypeScript');
-});
-
-app.post('/login', login)
+export { App };
