@@ -1,11 +1,22 @@
 import UserInterface from "../interfaces/UserInterface";
 import { User } from "../models/user.model";
 import { statusCodes, messageErrors } from "../statusCodes";
+import md5 from "md5";
+import JWT from "../helpers/JWTToken";
 
 export default class UserService {
     public static async register({ name , email, password, role }: UserInterface) {
-        const user = await User.create({ name, email, password, role });
-        return { response: { user }, code: statusCodes.CREATED };
+        const data = await User.findOne({ where: { email, name } });
+
+        if(data) return { response: { message: messageErrors.USER_REGISTER }, code: statusCodes.CONFLICT };
+
+        const newcreate = await User.create({ name, email, password: md5(password), role });
+
+        const { password: pass, ...newUser } = newcreate.dataValues;
+        
+        const token = await JWT.create(newUser);
+        
+        return { response: { newUser, token }, code: statusCodes.CREATED };
     }
 
     public static async login({ email, password }: UserInterface) {
