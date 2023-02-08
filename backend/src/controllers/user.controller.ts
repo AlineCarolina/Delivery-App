@@ -13,4 +13,13 @@ export default class UserController {
         const { response, code } = await UserService.login({ email, password });
         return res.status(code).json(response);
     }
+
+    public static async getAll(req: Request, res: Response) {
+        const { role } = req.query;
+
+        const { response, code } = await UserService.getAll(role);
+
+        return res.status(code).json(response);
+        
+    }
 }

@@ -20,8 +20,25 @@ export default class UserService {
     }
 
     public static async login({ email, password }: UserInterface) {
-        const userData = await User.findOne({ where: { email, password } });
+        const userData = await User.findOne({ where: { email, password: md5(password) } });
+
         if(!userData) return { response: { message: messageErrors.NOT_FOUND }, code: statusCodes.NOT_FOUND };
-        return { response: { userData }, code: statusCodes.OK };
+
+        const { password: pass, ...newUser } = userData.dataValues;
+        
+        const token = await JWT.create(newUser);
+
+        return { response: { userData, token }, code: statusCodes.OK };
+    }
+
+    public static async getAll(role: any) {
+        const data = await User.findAll({ where: role ? { role } : {} });
+
+        const dataWithoutPwd = data.map((user) => {
+            const { password, ...dataUser } = user.dataValues;
+            return dataUser
+        })
+
+        return { response: dataWithoutPwd, code: statusCodes.OK }
     }
 }
