@@ -41,4 +41,10 @@ export default class UserService {
 
         return { response: dataWithoutPwd, code: statusCodes.OK }
     }
+
+    public static async deleteUser(id: number) {
+        const userDeleted = await User.destroy({ where: { id } });
+
+        return { response: 'user deleted', code: statusCodes.OK }
+    }
 }

@@ -22,4 +22,12 @@ export default class UserController {
         return res.status(code).json(response);
         
     }
+
+    public static async deleteUser(req: Request, res: Response) {
+        const { id } = req.params;
+
+        const { response, code } = await UserService.deleteUser(+id);
+
+        return res.status(code).json(response);
+    }
 }
