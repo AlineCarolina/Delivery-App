@@ -10,5 +10,11 @@ export class SalesProducts extends Model {
         type: DataType.INTEGER,
         allowNull: false,
     })
+    product!: number
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
     quantity!: number;
 }

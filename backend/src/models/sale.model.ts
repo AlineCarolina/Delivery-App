@@ -1,7 +1,6 @@
-import { Table, Model, Column, DataType, } from "sequelize-typescript";
+import { Table, Model, Column, DataType } from "sequelize-typescript";
 
 @Table({
-    timestamps: false,
     tableName: "sale",
 })
 
@@ -35,12 +34,6 @@ export class Sale extends Model {
         allowNull: false,
     })
     delivery_number!: string;
-
-    @Column({
-        type: DataType.DATE,
-        allowNull: false,
-    })
-    sale_date!: Date;
 
     @Column({
         type: DataType.STRING,
