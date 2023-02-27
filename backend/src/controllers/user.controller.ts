@@ -3,9 +3,9 @@ import UserService from "../services/user.service";
 
 export default class UserController {
     public static async register(req: Request, res: Response) {
-        const { email, password, name, role = 'customer' } = req.body;
+        const { email, password, username, role = 'customer' } = req.body;
 
-        const { response, code } = await UserService.register({ email, password, name, role });
+        const { response, code } = await UserService.register({ email, password, username, role });
 
         return res.status(code).json(response);
     }

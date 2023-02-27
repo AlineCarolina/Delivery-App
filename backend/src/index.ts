@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { statusCodes } from "./statusCodes";
+import { statusCodes } from "./utils/statusCodes";
 import route from "./routes";
 
 class App {
@@ -20,12 +20,17 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    this.app.use(route)
+    this.app.use(route);
   }
 
   public start(PORT: string | number): void {
     this.app.listen(PORT, () => {
-      console.log(`Server is running at http://localhost:${PORT}`);
+      try {
+        console.log(`Server is running at http://localhost:${PORT}`);
+      } catch(err) {
+        console.log(err);
+      }
+      
     });
     this.app.get('/', (_req: Request, res: Response) => {
       res.status(statusCodes.OK).send('Express + TypeScript');

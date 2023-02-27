@@ -1,6 +1,6 @@
 import ProductInterface from "../interfaces/ProductInterface";
-import { Product } from "../models/product.model";
-import { statusCodes } from "../statusCodes";
+import { Product } from "../database/models/product.model";
+import { statusCodes } from "../utils/statusCodes";
 
 export default class ProductService {
     public static async getAll() {
