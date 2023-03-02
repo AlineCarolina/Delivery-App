@@ -18,4 +18,4 @@ Product.init({
   timestamps: false,
 });
 
-Product.sync({ force: true });
+/* Product.sync({ force: true }); */

@@ -1,15 +1,20 @@
 import { Model, DataTypes } from "sequelize";
 import db from ".";
+import { Product } from "./product.model";
+import { Sale } from "./sale.model";
 
 export class SaleProduct extends Model {
-    public product!: number;
+    public sale_id!: number;
+
+    public product_id!: number;
 
     public quantity!: number;
 }
 
 SaleProduct.init({
-    name: DataTypes.NUMBER,
-    price: DataTypes.NUMBER,
+    sale_id: DataTypes.NUMBER,
+    product_id: DataTypes.NUMBER,
+    quantity: DataTypes.NUMBER,
 }, {
     sequelize: db,
     modelName: 'saleProduct',
@@ -18,4 +23,8 @@ SaleProduct.init({
   timestamps: false,
 });
 
-SaleProduct.sync({ force: true });
+Sale.belongsToMany(Product, { as: 'products', through: SaleProduct, foreignKey: 'sale_id', otherKey: 'product_id' });
+
+Product.belongsToMany(Sale, { as: 'sales', through: SaleProduct, foreignKey: 'product_id', otherKey: 'sale_id' });
+
+/* SaleProduct.sync({ force: true }); */

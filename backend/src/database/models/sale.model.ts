@@ -1,7 +1,10 @@
 import { Model, DataTypes } from "sequelize";
 import db from ".";
+import { User } from "./user.model";
 
 export class Sale extends Model {
+    public id!: number;
+
     public user_id!: number;
 
     public seller_id!: number;
@@ -16,9 +19,9 @@ export class Sale extends Model {
 }
 
 Sale.init({
-  user_id: DataTypes.STRING,
-  seller_id: DataTypes.STRING,
-  total_price: DataTypes.STRING,
+  user_id: DataTypes.NUMBER,
+  seller_id: DataTypes.NUMBER,
+  total_price: DataTypes.NUMBER,
   delivery_address: DataTypes.STRING,
   delivery_number: DataTypes.STRING,
   status: DataTypes.STRING,
@@ -30,4 +33,7 @@ Sale.init({
   timestamps: false,
 });
 
-Sale.sync({ force: true });
+Sale.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+Sale.belongsTo(User, { foreignKey: 'seller_id', as: 'seller' });
+
+/* Sale.sync({ force: true }); */
