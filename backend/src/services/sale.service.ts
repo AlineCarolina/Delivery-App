@@ -1,5 +1,6 @@
 /* import SaleInterface from "../interfaces/SaleInterface"; */
 import { Sale } from "../database/models/sale.model";
+import { SaleProduct } from "../database/models/saleProducts.model";
 import { statusCodes } from "../utils/statusCodes";
 
 export default class SaleService {
@@ -13,10 +14,21 @@ export default class SaleService {
 
     public static async postSale(body: any) {
         const { products, saleInfo } = body;
+        console.log(body);
+        console.log(saleInfo);
+        
+        
+        const { id } = await Sale.create(saleInfo);
+      
+        const orders = await Promise.all(products.map(({ id: product_id, quantity }: any) => (
+          SaleProduct.create({ sale_id: id, product_id, quantity })
+        )));
+
+        /* const { products, saleInfo } = body;
         const sale = await Sale.create(saleInfo);
-        const { id } = sale.get();
+        const { id } = sale.get(); */
 
 
-        return { response: id, code: statusCodes.CREATED };
+        return { response: id, orders, code: statusCodes.CREATED };
     }
 }
