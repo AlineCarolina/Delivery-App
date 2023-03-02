@@ -1,7 +1,7 @@
-import { Model, DataTypes } from "sequelize";
-import db from ".";
-import { Product } from "./product.model";
-import { Sale } from "./sale.model";
+import { Model, DataTypes } from 'sequelize';
+import db from '.';
+import { Product } from './product.model';
+import { Sale } from './sale.model';
 
 export class SaleProduct extends Model {
     public sale_id!: number;
@@ -17,14 +17,12 @@ SaleProduct.init({
     quantity: DataTypes.NUMBER,
 }, {
     sequelize: db,
-    modelName: 'saleProduct',
-    tableName: 'saleProducts',
+    modelName: "saleProduct",
+    tableName: "saleProducts",
     underscored: true,
   timestamps: false,
 });
 
-Sale.belongsToMany(Product, { as: 'products', through: SaleProduct, foreignKey: 'sale_id', otherKey: 'product_id' });
+Sale.belongsToMany(Product, { as: "products", through: SaleProduct, foreignKey: "sale_id", otherKey: "product_id" });
 
-Product.belongsToMany(Sale, { as: 'sales', through: SaleProduct, foreignKey: 'product_id', otherKey: 'sale_id' });
-
-/* SaleProduct.sync({ force: true }); */
+Product.belongsToMany(Sale, { as: "sales", through: SaleProduct, foreignKey: "product_id", otherKey: "sale_id" });

@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import db from ".";
+import { Model, DataTypes } from 'sequelize';
+import db from '.';
 
 export class Product extends Model {
     public name!: string;
@@ -12,10 +12,8 @@ Product.init({
     price: DataTypes.STRING,
 }, {
     sequelize: db,
-    modelName: 'product',
-    tableName: 'products',
+    modelName: "product",
+    tableName: "products",
     underscored: true,
   timestamps: false,
 });
-
-/* Product.sync({ force: true }); */

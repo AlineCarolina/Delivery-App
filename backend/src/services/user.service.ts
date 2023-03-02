@@ -1,8 +1,8 @@
-import UserInterface from "../interfaces/UserInterface";
-import { User } from "../database/models/user.model"
-import { statusCodes, messageErrors } from "../utils/statusCodes";
-import md5 from "md5";
-import JWT from "../helpers/JWTToken";
+import UserInterface from '../interfaces/UserInterface';
+import { User } from '../database/models/user.model';
+import { statusCodes, messageErrors } from '../utils/statusCodes';
+import md5 from 'md5';
+import JWT from '../helpers/JWTToken';
 
 export default class UserService {
     public static async register({ username , email, password, role }: UserInterface) {

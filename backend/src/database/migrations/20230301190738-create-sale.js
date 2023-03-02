@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('sales', {
+    await queryInterface.createTable("sales", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,8 +15,8 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
         references: {
-          model: 'users',
-          key: 'id'
+          model: "users",
+          key: "id"
         }
       },
       seller_id: {
@@ -25,8 +25,8 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
         references: {
-          model: 'users',
-          key: 'id'
+          model: "users",
+          key: "id"
         }
       },
       total_price: {
@@ -49,6 +49,6 @@ module.exports = {
   },
 
   down: async (queryInterface, _Sequelize) => {
-    await queryInterface.dropTable('sales');
+    await queryInterface.dropTable("sales");
   }
 };

@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-import { messageErrors, statusCodes } from "../utils/statusCodes";
-import JWT from "./JWTToken";
+import { NextFunction, Request, Response } from 'express';
+import { messageErrors, statusCodes } from '../utils/statusCodes';
+import JWT from './JWTToken';
 
 export default class TokenValidation {
     public static async verify(req: Request, res: Response, next: NextFunction) {

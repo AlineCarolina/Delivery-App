@@ -1,6 +1,6 @@
-import { Model, DataTypes } from "sequelize";
-import db from ".";
-import { User } from "./user.model";
+import { Model, DataTypes } from 'sequelize';
+import db from '.';
+import { User } from './user.model';
 
 export class Sale extends Model {
     public id!: number;
@@ -27,13 +27,12 @@ Sale.init({
   status: DataTypes.STRING,
 }, {
   sequelize: db,
-  modelName: 'sale',
-  tableName: 'sales',
+  modelName: "sale",
+  tableName: "sales",
   underscored: true,
   timestamps: false,
 });
 
-Sale.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
-Sale.belongsTo(User, { foreignKey: 'seller_id', as: 'seller' });
+Sale.belongsTo(User, { foreignKey: "user_id", as: "user" });
+Sale.belongsTo(User, { foreignKey: "seller_id", as: "seller" });
 
-/* Sale.sync({ force: true }); */
