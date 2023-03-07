@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import ProductService from "../services/product.service";
+import { Request, Response } from 'express';
+import ProductService from '../services/product.service';
 
 export default class ProductController {
     public static async getAll(_req: Request, res: Response) {

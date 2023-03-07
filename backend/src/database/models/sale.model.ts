@@ -15,15 +15,18 @@ export class Sale extends Model {
 
     public delivery_number!: string;
 
+    public sale_date!: Date;
+
     public status!: string;
 }
 
 Sale.init({
   user_id: DataTypes.NUMBER,
   seller_id: DataTypes.NUMBER,
-  total_price: DataTypes.NUMBER,
+  total_price: DataTypes.DECIMAL(9, 2),
   delivery_address: DataTypes.STRING,
   delivery_number: DataTypes.STRING,
+  sale_date: DataTypes.DATE,
   status: DataTypes.STRING,
 }, {
   sequelize: db,

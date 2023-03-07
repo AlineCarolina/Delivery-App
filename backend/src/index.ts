@@ -1,6 +1,8 @@
-import express, { Request, Response } from "express";
-import { statusCodes } from "./utils/statusCodes";
-import route from "./routes";
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import { statusCodes } from './utils/statusCodes';
+import route from './routes';
+import path from 'path';
 
 class App {
   public app: express.Express;
@@ -21,6 +23,8 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
     this.app.use(route);
+    this.app.use(cors())
+    this.app.use('/images', express.static(path.join(__dirname, '../images')));
   }
 
   public start(PORT: string | number): void {
