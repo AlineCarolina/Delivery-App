@@ -7,15 +7,24 @@ import JWT from '../helpers/JWTToken';
 export default class UserService {
     public static async register({ username , email, password, role }: UserInterface) {
         const data = await User.findOne({ where: { email, username } });
-
         if(data) return { response: { message: messageErrors.USER_REGISTER }, code: statusCodes.CONFLICT };
+
+        if(!username || username.length < 3) return { response: { message: messageErrors.FIELDS_INV }, code: statusCodes.BAD_REQUEST };
+
+        if(!email) return { response: { message: messageErrors.EMAIL_IS_NOT }, code: statusCodes.BAD_REQUEST };
+
+        const emailFormat = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        const emailPass = emailFormat.test(email);
+        if(!emailPass) return { response: { message: messageErrors.EMAIL_VALID}, code: statusCodes.BAD_REQUEST };
+
+        if(!password) return { response: { message: messageErrors.PASSWORD_IS_NOT }, code: statusCodes.BAD_REQUEST };
+
+        if(password.length < 6) return { response: { message: messageErrors.PASSWORD_LENGTH }, code: statusCodes.BAD_REQUEST };
 
         const newcreate = await User.create({ username, email, password: md5(password), role });
         
         const { password: pass, ...newUser } = newcreate.get();
-        
         const token = await JWT.create(newUser);
-        
         return { response: { newUser, token }, code: statusCodes.CREATED };
     }
 
