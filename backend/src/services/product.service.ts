@@ -9,8 +9,8 @@ export default class ProductService {
         return { response: data, code: statusCodes.OK }
     }
 
-    public static async postProduct({ name, price }: ProductInterface) {
-        const data = await Product.create({ name, price });
+    public static async postProduct({ name, price, url_image }: ProductInterface) {
+        const data = await Product.create({ name, price, url_image });
         
         return { response: data, code: statusCodes.CREATED }
     }

@@ -9,9 +9,7 @@ export default class ProductController {
     }
 
     public static async postProduct(req: Request, res: Response) {
-        const { name, price } = req.body
-
-        const { response, code } = await ProductService.postProduct({ name, price });
+        const { response, code } = await ProductService.postProduct(req.body);
         
         return res.status(code).json(response);
     }

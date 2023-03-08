@@ -1,6 +1,7 @@
 interface ProductInterface {
     name: string,
-    price: string
+    price: number,
+    url_image: string,
 }
 
 export default ProductInterface;
