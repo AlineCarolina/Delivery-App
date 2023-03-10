@@ -19,9 +19,7 @@ export default class UserController {
     }
 
     public static async getAll(req: Request, res: Response) {
-        const { role } = req.query;
-
-        const { response, code } = await UserService.getAll(role);
+        const { response, code } = await UserService.getAll();
 
         return res.status(code).json(response);
         
