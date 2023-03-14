@@ -9,6 +9,7 @@ export default class TokenValidation {
         if(!authorization) {
             return res.status(statusCodes.NOT_FOUND).json({ message: messageErrors.TOKEN_NOT_FOUND});
         }
+        
         try {
             await JWT.validate(authorization);
             next();
