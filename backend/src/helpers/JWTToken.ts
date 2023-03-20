@@ -3,7 +3,7 @@ import { sign, verify } from 'jsonwebtoken';
 
 
 export default class JWT {
-    public static async create(jwtUser: object) {
+    public static async create(jwtUser: object): Promise<string> {
         const jwtSecret = await readFile("./jwt.evaluation.key", "utf-8");
         return sign(jwtUser, jwtSecret, { expiresIn: "30d", algorithm: "HS256" });
     }

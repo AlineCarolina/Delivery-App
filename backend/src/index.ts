@@ -23,17 +23,23 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
     this.app.use(route);
-    this.app.use(cors())
+    this.app.use(cors());
     this.app.use('/images', express.static(path.join(__dirname, '../images')));
   }
 
   public start(PORT: string | number): void {
-    this.app.listen(PORT, () => {
+    const server = this.app.listen(PORT, () => {
       try {
         console.log(`Server is running at http://localhost:${PORT}`);
       } catch(err) {
         console.log(err);
       }
+
+    process.on('SIGINT', () => {
+      server.close()
+
+      console.log('App finished');
+    })
       
     });
     this.app.get('/', (_req: Request, res: Response) => {
@@ -43,3 +49,5 @@ class App {
 }
 
 export { App };
+
+export const { app } = new App();

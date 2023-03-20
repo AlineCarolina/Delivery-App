@@ -15,7 +15,7 @@ export const messageErrors = {
   UNAUTHORIZED_USER: 'Unauthorized user',
   TOKEN_NOT_FOUND: 'Token not found',
   ERROR_SERVER: 'Internal server error',
-  USER_REGISTER: 'Email or Password already in use',
+  USER_REGISTER: 'Email already in use',
   NOT_EXIST_USER: 'User does not exist',
   EMAIL_REQUIRED: '"email" is required',
   EMAIL_VALID: '"email" must be a valid email',
