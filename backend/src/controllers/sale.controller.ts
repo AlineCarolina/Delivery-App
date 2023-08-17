@@ -33,9 +33,8 @@ export default class SaleController {
     }
 
     public static async postSale(req: Request, res: Response): Promise<Response> {
-        const { body } = req;
         
-        const { response, code } = await SaleService.postSale(body);
+        const { response, code } = await SaleService.postSale(req.body);
 
         return res.status(code).json(response);
     }

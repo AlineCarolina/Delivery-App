@@ -9,7 +9,10 @@
     "start": "nodemon ./dist/server.js",
     "dev": "tsnd server.ts",
     "build": "tsc",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "dbcreate": "env $(cat .env) npx sequelize db:create",
+    "dbmigrate": "env $(cat .env) npx sequelize db:migrate",
+    "dbseed": "env $(cat .env) npx sequelize db:seed:all"
   },
   "keywords": [],
   "author": "",

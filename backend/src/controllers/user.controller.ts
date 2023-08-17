@@ -3,17 +3,13 @@ import UserService from '../services/user.service';
 
 export default class UserController {
     public static async register(req: Request, res: Response): Promise<Response> {
-        const { email, password, username, role = "customer" } = req.body;
-
-        const { response, code } = await UserService.register({ email, password, username, role });
+        const { response, code } = await UserService.register(req.body);
 
         return res.status(code).json(response);
     }
 
     public static async login(req: Request, res: Response): Promise<Response> {
-        const { email, password } = req.body;
-
-        const { response, code } = await UserService.login({ email, password });
+        const { response, code } = await UserService.login(req.body);
 
         return res.status(code).json(response);
     }

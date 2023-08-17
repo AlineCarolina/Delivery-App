@@ -6,7 +6,7 @@ import JWT from '../helpers/JWTToken';
 import { Op } from 'sequelize';
 
 export default class UserService {
-    public static async register({ username , email, password, role }: UserInterface){
+    public static async register({ username , email, password, role = "customer" }: UserInterface){
         const data = await User.findOne({ where: { email, username } });
         if(data) return { response: { message: messageErrors.USER_REGISTER }, code: statusCodes.CONFLICT };
 
@@ -58,7 +58,9 @@ export default class UserService {
     }
 
     public static async deleteUser(id: number) {
-        await User.destroy({ where: { id } });
+        const userDeleted = await User.destroy({ where: { id } });
+
+        if(!userDeleted) return { response: { message: messageErrors.FIELDS_INV }, code: statusCodes.BAD_REQUEST }
 
         return { response: 'user deleted', code: statusCodes.OK }
     }
