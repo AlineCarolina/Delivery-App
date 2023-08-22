@@ -1,6 +1,5 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
-import { statusCodes } from './utils/statusCodes';
 import route from './routes';
 import path from 'path';
 
@@ -19,12 +18,12 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-
+    
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(accessControl);
     this.app.use(route);
-    this.app.use(cors());
-    this.app.use('/images', express.static(path.join(__dirname, '../images')));
+    this.app.use('/images', express.static(path.join(__dirname, '../../assets/images')));
   }
 
   public start(PORT: string | number): void {
@@ -41,9 +40,6 @@ class App {
       console.log('App finished');
     })
       
-    });
-    this.app.get('/', (_req: Request, res: Response) => {
-      res.status(statusCodes.OK).send('Express + TypeScript');
     });
   }
 }
