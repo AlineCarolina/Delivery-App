@@ -1,9 +1,9 @@
-import axios from "axios"
+import axios from "axios";
 
 const api = axios.create({ baseURL: "http://localhost:3000" });
 
 export const setToken = (token: string) => {
-    api.defaults.headers.common.Authorization = token;
+    api.defaults.headers.common['Authorization'] = token;
 };
 
 export const postData = async (endpoint: string, body: any) => {

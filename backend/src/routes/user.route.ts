@@ -6,8 +6,7 @@ const route = Router();
 
 route.post('/register', UserController.register);
 route.post('/login', UserController.login);
-route.use(TokenValidation.verify);
-route.get('/users', UserController.getAll);
-route.delete('/user/:id', UserController.deleteUser);
+route.get('/users', UserController.getAll, TokenValidation.verify);
+route.delete('/user/:id', UserController.deleteUser, TokenValidation.verify);
 
 export default route;

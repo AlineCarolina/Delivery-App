@@ -7,7 +7,6 @@ function CardProduct() {
 
     useEffect(() => {
         requestData("/products").then((data) => setProducts(data));
-        console.log(products);
     }, []);
 
     return (

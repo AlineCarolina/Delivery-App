@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { postData, setToken } from "../services/requests";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +29,6 @@ function Login() {
             const data = await postData("/login", loginInfo);
             localStorage.setItem("user", JSON.stringify(data));
             setToken(data.token)
-            console.log(data.token)
 
             switch(data.newUser.role) {
                 case "seller": return navigate("/seller/orders");
@@ -41,15 +40,7 @@ function Login() {
             setHandleLogin(true)
         } 
     };
-
-    //useEffect(() => {
-    //    const userString = localStorage.getItem("user");
-    //    const user = userString ? JSON.parse(userString) : null
-    //    if (user) {
-    //      setToken(user.token);
-    //    }
-    //  }, []);
-
+    
     return (
         <main className="tela-login">
             <div>
