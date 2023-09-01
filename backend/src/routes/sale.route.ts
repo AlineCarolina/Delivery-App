@@ -1,13 +1,14 @@
 import { Router } from "express";
 import SaleController from "../controllers/sale.controller";
+import TokenValidation from "../helpers/tokenValidation";
 
 const route = Router();
 
-route.get('/sale', SaleController.getAll);
-route.get('/sale/:id', SaleController.getById);
-route.get('/sale/seller/:id', SaleController.getBySellerId);
-route.get('/sale/customer/:id', SaleController.getByCustomerId);
-route.post('/sale', SaleController.postSale);
+route.get('/sale', SaleController.getAll, TokenValidation.verify);
+route.get('/sale/:id', SaleController.getById, TokenValidation.verify);
+route.get('/sale/seller/:id', SaleController.getBySellerId, TokenValidation.verify);
+route.get('/sale/customer/:id', SaleController.getByCustomerId, TokenValidation.verify);
+route.post('/sale', SaleController.postSale, TokenValidation.verify);
 
 
 export default route;
