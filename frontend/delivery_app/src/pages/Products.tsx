@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import CardProduct from "../componets/CardProduct";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "../services/requests";
+import Header from "../componets/Header";
 
 function Products() {
     const navigate = useNavigate();
@@ -15,7 +16,8 @@ function Products() {
 
     return (
         <>
-        <CardProduct />
+            <Header />
+            <CardProduct />
         </>
     )
 }
