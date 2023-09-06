@@ -3,6 +3,7 @@ import { requestData } from "../services/requests";
 import Products from "../types/types";
 import CardButton from "./CardButton";
 import DeliveryContext from "../context/deliveryContext";
+import "../styles/CardProductStyle.css"
 
 function CardProduct() {
     const [products, setProducts] = useState<Products[]>([]);
@@ -13,28 +14,29 @@ function CardProduct() {
     }, []);
 
     return (
-        <>
+        <div className="div_page_products">
             {
                 products && products.map((item) => (
-                    <div key={ item.id }>
+                    <div key={ item.id } className="div_item_product">
                         <div>
-                            <p>
-                                { item.price }
-                            </p>
                             <img
                                 src={ item.url_image }
                                 alt={ item.name }
+                                className="img_item_product"
                             />
                         </div>
                         <div>
-                            <h1>{ item.name }</h1>
+                            <p className="title_item_product">{ item.name }</p>
+                            <p className="price_item_product">
+                                { item.price }
+                            </p>
                             <CardButton product={ item }/>
                         </div>
                     </div>
                 ))
             }
             <h2>{ total }</h2>
-        </>
+        </div>
     )
 }
 

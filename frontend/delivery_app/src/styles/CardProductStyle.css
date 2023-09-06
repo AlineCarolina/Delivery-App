@@ -1,0 +1,25 @@
+.div_page_products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.div_item_product{
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 25px;
+    margin-top: 30px;
+    padding: 30px;
+}
+
+.price_item_product{
+    font-weight: bold;
+}
+
+.img_item_product{
+    border-radius: 50%;
+    width: 300px;
+}
+
+.title_item_product{
+    font-size: 90%;
+}
