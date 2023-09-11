@@ -4,10 +4,12 @@ import Products from "../types/types";
 import CardButton from "./CardButton";
 import DeliveryContext from "../context/deliveryContext";
 import "../styles/CardProductStyle.css"
+import { useNavigate } from "react-router-dom";
 
 function CardProduct() {
     const [products, setProducts] = useState<Products[]>([]);
     const { total } = useContext(DeliveryContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         requestData("/products").then((data) => setProducts(data));
@@ -35,7 +37,14 @@ function CardProduct() {
                     </div>
                 ))
             }
-            <h2>{ total }</h2>
+            <button
+                type="button"
+                onClick={ () => navigate('/customer/checkout') }
+                disabled={ total === '0,00' }
+            >
+                {'Ver Carrinho: '}
+                <span>{`R$: ${total}`}</span>
+            </button>
         </div>
     )
 }
