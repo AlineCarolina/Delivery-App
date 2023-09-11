@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import storageFuncs from "../utils/storageFuncs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DeliveryContext from "../context/deliveryContext";
+import "../styles/Header.css";
 
 function Header() {
     const navigate = useNavigate();
@@ -27,14 +28,21 @@ function Header() {
     return (
         <header>
             { roleST === "customer" ?
-                (<div>
-                    <h1>{ usernameST }</h1>
-                    <button
-                        type="button"
-                        onClick={ () => logout() }
-                    >
-                        Sair
-                    </button>
+                (<div className="div_header">
+                    <div>
+                        <Link to={"/customer/products"}>Produtos</Link>
+                        <Link to={"/"}>Meus Pedidos</Link>
+                    </div>
+                    <div className="div_header_info_user">
+                        <h1>{ usernameST }</h1>
+                        <button
+                            type="button"
+                            onClick={ () => logout() }
+                        >
+                            Sair
+                        </button>
+                    </div>
+                    
                 </div> ) :
                 <p>oi</p> }
         </header>

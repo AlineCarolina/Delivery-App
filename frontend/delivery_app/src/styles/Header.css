@@ -1,0 +1,10 @@
+.div_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.div_header_info_user {
+    display: flex;
+    flex-direction: row;
+}
