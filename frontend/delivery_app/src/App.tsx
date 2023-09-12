@@ -9,19 +9,17 @@ import Order from "./pages/Order"
 
 function App() {
   return (
-    <>
       <DeliveryProvider>
         <Router>
           <Routes>
-            <Route path="/" element={ <Login /> }/>
+            <Route path="/" element={ <Products/> } />
+            <Route path="/login" element={ <Login /> }/>
             <Route path="/register" element={ <Register /> } />
-            <Route path="/customer/products" element={ <Products/> } />
             <Route path="/customer/checkout" element={ <Checkout/> }/>
             <Route path="/customer/order" element={ <Order /> }/>
           </Routes>
         </Router>
       </DeliveryProvider>
-    </>
   )
 }
 
