@@ -2,6 +2,7 @@ import {  useState } from "react";
 import { postData, setToken } from "../services/requests";
 import { useNavigate } from "react-router-dom";
 import storageFuncs from "../utils/storageFuncs";
+import "../styles/Login.css";
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({
