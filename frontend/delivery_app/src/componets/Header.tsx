@@ -31,7 +31,7 @@ function Header() {
                 (<div className="div_header">
                     <div>
                         <Link to={"/customer/products"}>Produtos</Link>
-                        <Link to={"/"}>Meus Pedidos</Link>
+                        <Link to={"/customer/order"}>Meus Pedidos</Link>
                     </div>
                     <div className="div_header_info_user">
                         <h1>{ usernameST }</h1>
