@@ -9,12 +9,16 @@ function Header() {
     const [usernameST, setUsernameST] = useState("");
     const [roleST, setRoleST] = useState("");
     const { setCart } = useContext(DeliveryContext);
+    const [login, setLogin] = useState(true);
 
     useEffect(() => {
         const userData = storageFuncs.get("user");
-        if (!userData) return navigate("/");
-        setUsernameST(userData.newUser.username);
-        setRoleST(userData.newUser.role);
+        if(!userData) {
+            setLogin(false)
+        } else {
+            setUsernameST(userData.newUser.username);
+            setRoleST(userData.newUser.role);
+        }
     }, []);
 
     const logout = () => {
@@ -24,27 +28,38 @@ function Header() {
         navigate("/");
     }
 
-
     return (
         <header>
-            { roleST === "customer" ?
-                (<div className="div_header">
-                    <div>
-                        <Link to={"/customer/products"}>Produtos</Link>
-                        <Link to={"/customer/order"}>Meus Pedidos</Link>
-                    </div>
-                    <div className="div_header_info_user">
-                        <h1>{ usernameST }</h1>
-                        <button
-                            type="button"
-                            onClick={ () => logout() }
-                        >
-                            Sair
-                        </button>
-                    </div>
-                    
-                </div> ) :
-                <p>oi</p> }
+            {login ? (
+                roleST === "customer" ? (
+                        <div className="div_header">
+                            <div>
+                                <Link to={"/customer/products"}>Produtos</Link>
+                                <Link to={"/customer/order"}>Meus Pedidos</Link>
+                            </div>
+                            <div className="div_header_info_user">
+                                <h1>{ usernameST }</h1>
+                                <button
+                                    type="button"
+                                    onClick={ () => logout() }
+                                >
+                                    Sair
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div><p>teste para admin e vendedor</p></div>
+                    )
+                    ) : (
+                        <div>
+                            <button
+                                type="button"
+                                onClick={ () => navigate("/login") }
+                            >
+                                Login
+                            </button>
+                        </div>
+                    )}
         </header>
     )
 }
