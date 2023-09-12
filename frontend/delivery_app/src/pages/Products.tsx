@@ -1,17 +1,15 @@
 import { useEffect } from "react";
 import CardProduct from "../componets/CardProduct";
 import { useNavigate } from "react-router-dom";
-import { setToken } from "../services/requests";
 import Header from "../componets/Header";
+import storageFuncs from "../utils/storageFuncs";
 
 function Products() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userString = localStorage.getItem("user");
-        const user = userString ? JSON.parse(userString) : null;
-        if (null) return navigate("/login");
-        setToken(user.token)
+        const user = storageFuncs.get("user");
+        if (user == null) return navigate("/login");
     });
 
     return (

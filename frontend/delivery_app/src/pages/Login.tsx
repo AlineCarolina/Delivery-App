@@ -1,6 +1,7 @@
 import {  useState } from "react";
 import { postData, setToken } from "../services/requests";
 import { useNavigate } from "react-router-dom";
+import storageFuncs from "../utils/storageFuncs";
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({
@@ -27,7 +28,7 @@ function Login() {
         setHandleLogin(false);
         try {
             const data = await postData("/login", loginInfo);
-            localStorage.setItem("user", JSON.stringify(data));
+            storageFuncs.set("user", data);
             setToken(data.token)
 
             switch(data.newUser.role) {

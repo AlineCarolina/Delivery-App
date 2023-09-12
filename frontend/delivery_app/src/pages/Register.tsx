@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData, setToken } from "../services/requests";
+import storageFuncs from "../utils/storageFuncs";
 
 function Register() {
     const [registerData, setRegisterData] = useState({
@@ -30,12 +31,10 @@ function Register() {
     };
 
     const handleClick = async () => {
-        console.log(registerData);
-        
         setErrorRegister(false);
         try {
             const data = await postData('/register', registerData);
-            localStorage.setItem('user', JSON.stringify(data));
+            storageFuncs.set("user", data);
             setToken(data.token)
             navigate('/customer/products');
         } catch (_) {
