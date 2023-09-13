@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import DeliveryContext from "../context/deliveryContext";
 
-function OrderProduct() {
+function OrderProduct({ removeBtn }:any) {
     const { cart, setCart, total } = useContext(DeliveryContext);
 
     return (
@@ -14,7 +14,7 @@ function OrderProduct() {
                         <th>Quantidade</th>
                         <th>Valor Unitário</th>
                         <th>Sub-total</th>
-                        <th>Remover Item</th>
+                        { removeBtn && <th>Remover Item</th> }
                     </tr>
                 </thead>
                 <tbody>
@@ -28,12 +28,15 @@ function OrderProduct() {
                                     <td>{ product.price.replace(".", ",") }</td>
                                     <td>{( product.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
                                     <td>
-                                        <button
-                                            type="button"
-                                            onClick={ () => setCart(cart.filter(({id}: any) => id !== product.id)) }
-                                        >
-                                            Remover
-                                        </button>
+                                        { removeBtn && (
+                                            <button
+                                                type="button"
+                                                onClick={ () => setCart(cart.filter(({id}: any) => id !== product.id)) }
+                                            >
+                                                Remover
+                                            </button>
+                                        )  
+                                        }
                                     </td>
                                 </tr>
                             ) ) }
