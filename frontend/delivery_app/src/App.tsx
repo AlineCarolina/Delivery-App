@@ -6,6 +6,7 @@ import DeliveryProvider from "./provider/deliveryProvider"
 import Checkout from "./pages/Checkout"
 import Register from "./pages/Register"
 import Order from "./pages/Order"
+import DetailsOrder from "./pages/DetailsOrder"
 
 function App() {
   return (
@@ -13,10 +14,11 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={ <Products/> } />
-            <Route path="/login" element={ <Login /> }/>
-            <Route path="/register" element={ <Register /> } />
+            <Route path="/login" element={ <Login/> }/>
+            <Route path="/register" element={ <Register/> } />
             <Route path="/customer/checkout" element={ <Checkout/> }/>
-            <Route path="/customer/order" element={ <Order /> }/>
+            <Route path="/customer/order" element={ <Order/> }/>
+            <Route path="/customer/order/:id" element={ <DetailsOrder/> }/>
           </Routes>
         </Router>
       </DeliveryProvider>
