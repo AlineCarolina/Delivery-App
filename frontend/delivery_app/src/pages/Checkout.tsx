@@ -4,6 +4,7 @@ import OrderProduct from "../componets/OrderProduct";
 import { postData } from "../services/requests";
 import DeliveryContext from "../context/deliveryContext";
 import storageFuncs from "../utils/storageFuncs";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
     const [formCheckout, setFormCheckout] = useState({
@@ -11,6 +12,7 @@ function Checkout() {
         delivery_number: "",
     });
     const { total, cart, setCart } = useContext(DeliveryContext);
+    const navigate = useNavigate();
 
     const handleChange = ({ value, name }: any) => {
         setFormCheckout((prev) => ({
@@ -21,20 +23,10 @@ function Checkout() {
 
     const finishOrder = async () => {
         const user = storageFuncs.get("user");
-        console.log({
-            saleInfo: {
-                user_id: user.newUser.id,
-                seller_id: 2,
-                total_price: Number(total.replace(",", ".")),
-                ...formCheckout,
-                status: "Pendente",
-            },
-            products: cart.map(({ id, quantity }: any) => ({ product_id: id, quantity })),
-        });
-        
-        const saleId = await postData(
-            "/sale",
-            {
+        if (!user) {
+            navigate("/login")
+        } else {
+            console.log({
                 saleInfo: {
                     user_id: user.newUser.id,
                     seller_id: 2,
@@ -42,13 +34,26 @@ function Checkout() {
                     ...formCheckout,
                     status: "Pendente",
                 },
-                products: cart.map(({ id, quantity }: any) => ({ id, quantity })),
-            },
-        );
-        setCart(null);
-        localStorage.removeItem("cart");
-        console.log(saleId);
-        
+                products: cart.map(({ id, quantity }: any) => ({ product_id: id, quantity })),
+            });
+            
+            const saleId = await postData(
+                "/sale",
+                {
+                    saleInfo: {
+                        user_id: user.newUser.id,
+                        seller_id: 2,
+                        total_price: Number(total.replace(",", ".")),
+                        ...formCheckout,
+                        status: "Pendente",
+                    },
+                    products: cart.map(({ id, quantity }: any) => ({ id, quantity })),
+                },
+            );
+            setCart(null);
+            localStorage.removeItem("cart");
+            console.log(saleId);
+        }
     }
 
     return (
@@ -56,7 +61,7 @@ function Checkout() {
             <Header/>
             <main>
                 <h2>Finalizar Pedido</h2>
-                <OrderProduct />
+                <OrderProduct removeBtn />
                 <h2>Detalhes e Endereço para Entrega</h2>
                 <div>
                     <label htmlFor="delivery_address">
