@@ -38,4 +38,14 @@ export default class SaleController {
 
         return res.status(code).json(response);
     }
+
+    public static async updateSale(req: Request, res: Response): Promise<Response> {
+
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const { code } = await SaleService.updateSale(+id, status);
+
+        return res.status(code).end();
+    }
 }

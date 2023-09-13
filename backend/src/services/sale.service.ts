@@ -60,4 +60,17 @@ export default class SaleService {
 
         return { response: id, orders, code: statusCodes.CREATED };
     }
+
+    public static async updateSale(id: any, status: any) {
+        await Sale.update({
+            status,
+          },
+          {  
+            where: {
+              id,
+            },
+        });
+
+        return { code: statusCodes.OK }
+    }
 }
