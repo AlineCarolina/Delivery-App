@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import storageFuncs from "../utils/storageFuncs";
 import { Link, useNavigate } from "react-router-dom";
 import DeliveryContext from "../context/deliveryContext";
+import logo from "../images/Pizza Delivery.png"
 import "../styles/Header.css";
 
 function Header() {
@@ -30,14 +31,17 @@ function Header() {
 
     return (
         <header>
+            <div className="div-img-logo">
+                <img src={logo} className="image-logo"/>
+            </div>
             {login ? (
                 roleST === "customer" ? (
-                        <div className="div_header">
+                        <div className="div-header">
                             <div>
-                                <Link to={"/customer/products"}>Produtos</Link>
+                                <Link to={"/"}>Produtos</Link>
                                 <Link to={"/customer/order"}>Meus Pedidos</Link>
                             </div>
-                            <div className="div_header_info_user">
+                            <div className="div-header-info-user">
                                 <h1>{ usernameST }</h1>
                                 <button
                                     type="button"
@@ -51,10 +55,11 @@ function Header() {
                         <div><p>teste para admin e vendedor</p></div>
                     )
                     ) : (
-                        <div>
+                        <div className="div-btn">
                             <button
                                 type="button"
                                 onClick={ () => navigate("/login") }
+                                className="btn-login"
                             >
                                 Login
                             </button>
