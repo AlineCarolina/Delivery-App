@@ -34,7 +34,7 @@ function Login() {
 
             switch(data.newUser.role) {
                 case "seller": return navigate("/seller/orders");
-                case "customer": return navigate("/customer/products");
+                case "customer": return navigate("/");
                 case "administrator": return navigate("/admin/manage");
                 default: break;
             }
