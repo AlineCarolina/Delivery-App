@@ -3,7 +3,7 @@ import { requestData } from "../services/requests";
 import Products from "../types/types";
 import CardButton from "./CardButton";
 import DeliveryContext from "../context/deliveryContext";
-import "../styles/CardProductStyle.css"
+import "../styles/CardProduct.css"
 import { useNavigate } from "react-router-dom";
 
 function CardProduct() {

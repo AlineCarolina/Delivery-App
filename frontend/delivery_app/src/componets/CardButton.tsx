@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import DeliveryContext from "../context/deliveryContext";
+import "../styles/CardButton.css"
 
 function CardButton({ product }: any) { //obj
     const [quantity, setQuantity] = useState(0);
@@ -40,6 +41,7 @@ function CardButton({ product }: any) { //obj
                 -
             </button>
             <input
+                className="card-input"
                 type="number"
                 value={ quantity || 0 }
                 onChange={ (ev) => handleQuantity(ev.target.value) }
