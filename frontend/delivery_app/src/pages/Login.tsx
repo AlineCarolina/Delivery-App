@@ -2,6 +2,7 @@ import {  useState } from "react";
 import { postData, setToken } from "../services/requests";
 import { useNavigate } from "react-router-dom";
 import storageFuncs from "../utils/storageFuncs";
+import logo from "../images/Pizza Delivery.png";
 import "../styles/Login.css";
 
 function Login() {
@@ -45,9 +46,9 @@ function Login() {
     
     return (
         <main className="tela-login">
-            <div>
-                <h1>App Delivery</h1>
-                <form>
+            <div className="div-tela-login">
+                <img src={logo} alt="logo-app-delivery" className="img-logo"/>
+                <form className="form-login">
                     <label htmlFor="email">
                         <h3>Login</h3>
                         <input
