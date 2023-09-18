@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import storageFuncs from "../utils/storageFuncs";
 import { Link, useNavigate } from "react-router-dom";
 import DeliveryContext from "../context/deliveryContext";
-import logo from "../images/Pizza Delivery.png"
+import logo from "../images/Pizza Delivery.png";
+import svgLogout from "../images/logout-svgrepo-com.svg";
 import "../styles/Header.css";
 
 function Header() {
@@ -26,7 +27,19 @@ function Header() {
         localStorage.removeItem("user");
         setCart(null);
         localStorage.removeItem("cart");
-        navigate("/");
+        window.location.reload();
+    }
+
+    const setDivLogout = () => {
+        const divLogout = document.getElementById("hidden");
+
+        const estiloDisplay = window.getComputedStyle(divLogout!).getPropertyValue("display");
+
+        if (estiloDisplay === "none") {
+            divLogout!.style.display = "block";
+        } else {
+            divLogout!.style.display = "none";
+        } 
     }
 
     return (
@@ -37,25 +50,37 @@ function Header() {
             {login ? (
                 roleST === "customer" ? (
                         <div className="div-header">
-                            <div>
-                                <Link to={"/"}>Produtos</Link>
-                                <Link to={"/customer/order"}>Meus Pedidos</Link>
-                            </div>
-                            <div className="div-header-info-user">
-                                <h1>{ usernameST }</h1>
+                                <Link to={"/"} className="link-customer">Produtos</Link>
+                                <Link to={"/customer/order"} className="link-customer">Meus Pedidos</Link>
                                 <button
                                     type="button"
-                                    onClick={ () => logout() }
+                                    onClick={ () => setDivLogout() }
+                                    className="btn-login"
                                 >
-                                    Sair
+                                    Olá, { usernameST }
                                 </button>
-                            </div>
+                                <div id="hidden">
+                                    <div className="div-hidden">
+                                        <button
+                                            className="btn-logout"
+                                            type="button"
+                                            onClick={ () => logout() }
+                                        >
+                                            <object
+                                                type="image/svg+xml"
+                                                data={svgLogout}
+                                                id="object-svg"
+                                            ></object>
+                                            Sair
+                                        </button>
+                                    </div>
+                                    
+                                </div>
                         </div>
                     ) : (
                         <div><p>teste para admin e vendedor</p></div>
                     )
                     ) : (
-                        <div className="div-btn">
                             <button
                                 type="button"
                                 onClick={ () => navigate("/login") }
@@ -63,7 +88,6 @@ function Header() {
                             >
                                 Login
                             </button>
-                        </div>
                     )}
         </header>
     )
