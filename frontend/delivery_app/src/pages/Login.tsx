@@ -3,7 +3,7 @@ import { postData, setToken } from "../services/requests";
 import { useNavigate } from "react-router-dom";
 import storageFuncs from "../utils/storageFuncs";
 import logo from "../images/Pizza Delivery.png";
-import "../styles/Login.css";
+import "../styles/LoginRegister.css";
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({
@@ -45,10 +45,10 @@ function Login() {
     };
     
     return (
-        <main className="tela-login">
-            <div className="div-tela-login">
+        <main className="tela-main">
+            <div className="div-tela">
                 <img src={logo} alt="logo-app-delivery" className="img-logo"/>
-                <form className="form-login">
+                <form className="form-main">
                     <label htmlFor="email">
                         <h3>Login</h3>
                         <input

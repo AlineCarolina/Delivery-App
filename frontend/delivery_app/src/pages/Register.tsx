@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData, setToken } from "../services/requests";
 import storageFuncs from "../utils/storageFuncs";
+import "../styles/LoginRegister.css";
 
 function Register() {
     const [registerData, setRegisterData] = useState({
@@ -43,10 +44,10 @@ function Register() {
     };
 
     return (
-        <main>
-            <div>
+        <main className="tela-main">
+            <div className="div-tela">
                 <h1>Cadastro</h1>
-                <form>
+                <form className="form-main">
                     <label htmlFor="username">
                         <h3>Nome</h3>
                         <input
