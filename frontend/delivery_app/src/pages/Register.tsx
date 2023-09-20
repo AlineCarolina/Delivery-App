@@ -34,10 +34,10 @@ function Register() {
     const handleClick = async () => {
         setErrorRegister(false);
         try {
-            const data = await postData('/register', registerData);
+            const data = await postData("/register", registerData);
             storageFuncs.set("user", data);
             setToken(data.token)
-            navigate('/customer/products');
+            navigate("/");
         } catch (_) {
             setErrorRegister(true);
         }
@@ -46,7 +46,7 @@ function Register() {
     return (
         <main className="tela-main">
             <div className="div-tela">
-                <h1>Cadastro</h1>
+                <h1 className="h1-cadastro">Cadastro</h1>
                 <form className="form-main">
                     <label htmlFor="username">
                         <h3>Nome</h3>
@@ -85,6 +85,7 @@ function Register() {
                         type="button"
                         disabled={ validRegister(registerData) }
                         onClick={ () => handleClick() }
+                        id="btn-cadastro"
                     >
                         Cadastrar
                     </button>

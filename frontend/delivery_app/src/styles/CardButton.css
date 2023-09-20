@@ -1,4 +1,41 @@
+.div-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-input {
-    width: 25px;
-    text-align: center;
+    width: 23px;
+    height: 25px;
+    padding-left: 15px;
+    background-color: transparent;
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]
+{
+  -moz-appearance: textfield;
+}
+
+.btn-card {
+    height: 28px;
+    width: 30px;
+    background-color: transparent;
+    font-size: large;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.btn-card:hover {
+    border: 1px solid #FF0404;
+    color: #FF0404;
 }

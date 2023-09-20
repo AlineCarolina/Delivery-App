@@ -4,10 +4,10 @@ import Header from "../componets/Header";
 function Products() {
 
     return (
-        <>
+        <div>
             <Header />
             <CardProduct />
-        </>
+        </div>
     )
 }
 

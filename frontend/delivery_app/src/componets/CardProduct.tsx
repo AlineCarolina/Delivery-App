@@ -5,6 +5,7 @@ import CardButton from "./CardButton";
 import DeliveryContext from "../context/deliveryContext";
 import "../styles/CardProduct.css"
 import { useNavigate } from "react-router-dom";
+import svgCart from "../images/shopping-cart-outline-svgrepo-com.svg";
 
 function CardProduct() {
     const [products, setProducts] = useState<Products[]>([]);
@@ -13,7 +14,18 @@ function CardProduct() {
 
     useEffect(() => {
         requestData("/products").then((data) => setProducts(data));
+
     }, []);
+
+    useEffect(() => {
+        const cartBtn = document.getElementById("cart-btn");
+
+        if (total === "0,00") {
+            cartBtn!.style.display = "none";
+        } else {
+            cartBtn!.style.display = "block";
+        }
+    }, [total])
 
     return (
         <div className="div_page_products">
@@ -30,7 +42,7 @@ function CardProduct() {
                         <div>
                             <p className="title_item_product">{ item.name }</p>
                             <p className="price_item_product">
-                                { item.price }
+                                R$ { item.price }
                             </p>
                             <CardButton product={ item }/>
                         </div>
@@ -38,12 +50,16 @@ function CardProduct() {
                 ))
             }
             <button
+                id="cart-btn"
                 type="button"
                 onClick={ () => navigate('/customer/checkout') }
                 disabled={ total === '0,00' }
             >
-                {'Ver Carrinho: '}
-                <span>{`R$: ${total}`}</span>
+                <div className="div-cart-btn">
+                    <object type="image/svg+xml" data={svgCart} className="svgCart"></object>
+                    <span>{`R$: ${total}`}</span>
+                </div>
+                
             </button>
         </div>
     )

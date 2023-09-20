@@ -33,26 +33,29 @@ function CardButton({ product }: any) { //obj
     }
 
     return (
-        <>
+        <div className="div-btns">
             <button
                 onClick={ () => handleQuantity(quantity -1 < 0 ? 0 : quantity -1) }
                 type="button"
+                className="btn-card"
             >
                 -
             </button>
             <input
                 className="card-input"
                 type="number"
+                min={0}
                 value={ quantity || 0 }
                 onChange={ (ev) => handleQuantity(ev.target.value) }
             />
             <button
                 onClick={ () => handleQuantity(quantity + 1) }
                 type="button"
+                className="btn-card"
             >
                 +
             </button>
-        </>
+        </div>
     )
 }
 
