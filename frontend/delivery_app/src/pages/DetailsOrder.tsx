@@ -4,6 +4,7 @@ import { putData, requestData } from "../services/requests";
 import { useEffect, useState } from "react";
 import momentjs from 'moment';
 import OrderProduct from "../componets/OrderProduct";
+import "../styles/DetailsOrder.css";
 
 function DetailsOrder() {
     const { id } = useParams();
@@ -23,7 +24,7 @@ function DetailsOrder() {
     return (
         <>
             <Header/>
-            <main>
+            <main className="main-details">
                 { order && (
                     <div>
                         <h3>{ `Pedido ${order.id}` }</h3>

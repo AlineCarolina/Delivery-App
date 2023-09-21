@@ -1,0 +1,25 @@
+.div-order-product {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 25px;
+    padding: 15px;
+}
+
+.div-order-product th {
+    width: 17%;
+}
+
+.btn-remove-item {
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.btn-remove-item:hover {
+    border: 1px solid #FF0404;
+    color: #FF0404;
+}

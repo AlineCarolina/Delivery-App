@@ -5,6 +5,7 @@ import { postData } from "../services/requests";
 import DeliveryContext from "../context/deliveryContext";
 import storageFuncs from "../utils/storageFuncs";
 import { useNavigate } from "react-router-dom";
+import "../styles/Checkout.css";
 
 function Checkout() {
     const [formCheckout, setFormCheckout] = useState({
@@ -59,13 +60,13 @@ function Checkout() {
     return (
         <>
             <Header/>
-            <main>
-                <h2>Finalizar Pedido</h2>
+            <main className="main-checkout">
+                <h1>Finalizar Pedido</h1>
                 <OrderProduct removeBtn />
-                <h2>Detalhes e Endereço para Entrega</h2>
-                <div>
+                <h2>Endereço para Entrega</h2>
+                <div className="div-endereço">
                     <label htmlFor="delivery_address">
-                        <h4>Endereço</h4>
+                        <h4>Rua</h4>
                         <input
                             type="text"
                             value={ formCheckout.delivery_address }
@@ -84,15 +85,16 @@ function Checkout() {
                         onChange={ (ev) => handleChange(ev.target) }
                         />
                     </label>
-                </div>
-                <div>
                     <button
                         type="button"
                         onClick={ () => finishOrder() }
                         disabled={ Object.values(formCheckout).some((value) => value === '') }
+                        className="btn-finalizar"
                     >
                         Finalizar Pedido
                     </button>
+                </div>
+                <div>
                 </div>
             </main>
         </>

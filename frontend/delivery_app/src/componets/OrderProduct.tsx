@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import DeliveryContext from "../context/deliveryContext";
+import "../styles/OrderProduct.css";
 
 function OrderProduct({ removeBtn }:any) {
     const { cart, setCart, total } = useContext(DeliveryContext);
 
     return (
-        <>
+        <div className="div-order-product">
             <table>
                 <thead>
                     <tr>
@@ -30,6 +31,7 @@ function OrderProduct({ removeBtn }:any) {
                                     <td>
                                         { removeBtn && (
                                             <button
+                                                className="btn-remove-item"
                                                 type="button"
                                                 onClick={ () => setCart(cart.filter(({id}: any) => id !== product.id)) }
                                             >
@@ -47,7 +49,7 @@ function OrderProduct({ removeBtn }:any) {
             <div>
                 <h2>{`Total: R${total}`}</h2>
             </div>
-        </>
+        </div>
     )
 }
 

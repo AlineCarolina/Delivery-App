@@ -4,6 +4,7 @@ import { requestData } from "../services/requests";
 import storageFuncs from "../utils/storageFuncs";
 import { Link } from "react-router-dom";
 import momentjs from 'moment';
+import "../styles/Order.css";
 
 function Order() {
     const [orders, setOrders] = useState<any[]>([]);
@@ -22,22 +23,24 @@ function Order() {
     return (
         <>
             <Header/>
-            { orders && orders.map((order: any) => (
-                <section key={order.id}>
-                    <Link to={ `/customer/order/${order.id}` }>
-                        <div>
-                            <h2>{ `Pedido: ${order.id}` }</h2>
-                        </div>
-                        <div>
-                            <h3>{ order.status }</h3>
-                        </div>
-                        <div>
-                            <h3>{ momentjs(order.sale_date).format('DD/MM/YYYY') }</h3>
-                            <h3>{ order.total_price.replace('.', ',') }</h3>
-                        </div>
-                    </Link>
-                </section>
-            )) }
+            <div className="div-order">
+                { orders && orders.map((order: any) => (
+                    <section key={order.id} className="section-order">
+                        <Link to={ `/customer/order/${order.id}` } className="link-order">
+                            <div className="div-nmr-ord">
+                                <h2>{ `Pedido: ${order.id}` }</h2>
+                            </div>
+                            <div className="div-stt-ord">
+                                <h3>{ order.status }</h3>
+                            </div>
+                            <div className="div-date-ord">
+                                <h3 className="h3-date">{ momentjs(order.sale_date).format('DD/MM/YYYY') }</h3>
+                                <h3>R$ { order.total_price.replace('.', ',') }</h3>
+                            </div>
+                        </Link>
+                    </section>
+                )) }
+            </div>
         </>
     )
 }
