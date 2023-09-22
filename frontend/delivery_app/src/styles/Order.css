@@ -37,7 +37,7 @@
     width: 35vh;
     height: 15vh;
     border: 1px solid rgb(97, 97, 97);
-    border-radius: 25px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +53,7 @@
 .div-date-ord h3 {
     border: 1px solid rgb(97, 97, 97);
     border-radius: 10px;
-    height: 5vh;
+    height: 4vh;
     padding: 10px;
     margin: 0;
     margin-bottom: 5px;
