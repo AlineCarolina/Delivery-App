@@ -62,3 +62,15 @@
 .link-order:hover {
     background-color: #1b1b1b;
 }
+
+.pendente {
+    background-color: #FF0404;
+}
+
+.preparando {
+    background-color: #c7bc42;
+}
+
+.entregue {
+    background-color: #61b560;
+}

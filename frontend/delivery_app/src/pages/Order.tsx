@@ -12,13 +12,32 @@ function Order() {
     useEffect(() => {
         const getData = async () => {
             const clientId = storageFuncs.get("user");
-            console.log(clientId.newUser.id);
             const data = await requestData(`/sale/customer/${clientId.newUser.id}`);
             setOrders(data as any[]);
-            console.log(orders);
         }
+
         getData();
     }, []);
+
+    useEffect(() => {
+            const elementosStatus = document.querySelectorAll(".div-stt-ord");
+            elementosStatus.forEach((elemento) => {
+                const h3Status = elemento.querySelector("h3");
+                if (h3Status) {
+                    const textStatus = h3Status.textContent;
+                    switch (textStatus) {
+                        case "Pendente":
+                            elemento.classList.add("pendente");
+                            break;
+                        case "Preparando":
+                            elemento.classList.add("preparando");
+                            break;
+                        default:
+                            elemento.classList.add("entregue");
+                    }
+                }
+            });
+    }, [orders]);
 
     return (
         <>
@@ -30,8 +49,8 @@ function Order() {
                             <div className="div-nmr-ord">
                                 <h2>{ `Pedido: ${order.id}` }</h2>
                             </div>
-                            <div className="div-stt-ord">
-                                <h3>{ order.status }</h3>
+                            <div className="div-stt-ord" id="div-status">
+                                <h3 id="h3-status">{ order.status }</h3>
                             </div>
                             <div className="div-date-ord">
                                 <h3 className="h3-date">{ momentjs(order.sale_date).format('DD/MM/YYYY') }</h3>
