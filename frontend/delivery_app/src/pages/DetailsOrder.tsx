@@ -26,7 +26,7 @@ function DetailsOrder() {
             <Header/>
             <main className="main-details">
                 { order && (
-                    <div>
+                    <div className="div-main-details">
                         <h3>{ `Pedido ${order.id}` }</h3>
                         <h3>{ order.status }</h3>
                         <h3>{ momentjs(order.sale_date).format('DD/MM/YYYY') }</h3>
