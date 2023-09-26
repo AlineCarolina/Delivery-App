@@ -51,9 +51,6 @@ function Checkout() {
                     products: cart.map(({ id, quantity }: any) => ({ id, quantity })),
                 },
             );
-            setCart(null);
-            localStorage.removeItem("cart");
-            console.log(saleId);
         }
     }
 
