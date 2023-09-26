@@ -48,10 +48,21 @@ function Header() {
                 <img src={logo} className="image-logo"/>
             </div>
             {login ? (
-                roleST === "customer" ? (
                         <div className="div-header">
-                                <Link to={"/"} className="link-customer">Produtos</Link>
-                                <Link to={"/customer/order"} className="link-customer">Meus Pedidos</Link>
+                                
+                                {
+                                    roleST === "customer" && (
+                                        <>
+                                            <Link to={"/"}>Produtos</Link>
+                                            <Link to={"/customer/order"}>Meus Pedidos</Link>
+                                        </>
+                                    )
+                                }
+                               {
+                                    roleST === "seller" && (
+                                        <Link to={"/seller/orders"}>Pedidos</Link>
+                                    )
+                               }
                                 <button
                                     type="button"
                                     onClick={ () => setDivLogout() }
@@ -77,9 +88,6 @@ function Header() {
                                     
                                 </div>
                         </div>
-                    ) : (
-                        <div><p>teste para admin e vendedor</p></div>
-                    )
                     ) : (
                             <button
                                 type="button"
