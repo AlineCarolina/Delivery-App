@@ -15,7 +15,6 @@ function Order() {
             const data = await requestData(`/sale/customer/${clientId.newUser.id}`);
             setOrders(data as any[]);
         }
-
         getData();
     }, []);
 
