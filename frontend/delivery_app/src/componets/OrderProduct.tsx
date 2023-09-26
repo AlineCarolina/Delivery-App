@@ -28,26 +28,28 @@ function OrderProduct({ removeBtn }:any) {
                                     <td>{ product.quantity }</td>
                                     <td>{ product.price.replace(".", ",") }</td>
                                     <td>{( product.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
-                                    <td>
                                         { removeBtn && (
-                                            <button
-                                                className="btn-remove-item"
-                                                type="button"
-                                                onClick={ () => setCart(cart.filter(({id}: any) => id !== product.id)) }
-                                            >
-                                                Remover
-                                            </button>
+                                            
+                                        <td>
+                                                <button
+                                                    className="btn-remove-item"
+                                                    type="button"
+                                                    onClick={ () => setCart(cart.filter(({id}: any) => id !== product.id)) }
+                                                >
+                                                    Remover
+                                                </button>
+                                                
+                                        </td>
                                         )  
                                         }
-                                    </td>
                                 </tr>
                             ) ) }
                         </>
                     ) }
                 </tbody>
             </table>
-            <div>
-                <h2>{`Total: R${total}`}</h2>
+            <div className="div-h2-total">
+                <h2 className="h2-total">{`Total: R$ ${total}`}</h2>
             </div>
         </div>
     )

@@ -23,3 +23,15 @@
     border: 1px solid #FF0404;
     color: #FF0404;
 }
+
+.div-h2-total {
+    display: flex;
+    align-self: flex-end;
+}
+
+.h2-total {
+    background-color: #61b560;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0;
+}
