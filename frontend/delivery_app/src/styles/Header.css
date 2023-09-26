@@ -67,8 +67,8 @@ header {
 #hidden {
     display: none;
     position: absolute;
-    right: 0px;
-    top: 45px;
+    right: 10px;
+    top: 60px;
     border: 1px solid rgb(97, 97, 97);
     background-color: #242424;
     width: 129px;
