@@ -31,6 +31,10 @@ function DetailsOrder() {
                         break;
                     case "Entregue":
                         elementosStatus?.classList.add("entregue");
+                        break;
+                    case "Em Trânsito":
+                        elementosStatus?.classList.add("transito");
+                        break;
                 }
         }, [order])
 

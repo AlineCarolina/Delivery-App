@@ -37,8 +37,12 @@ function Order() {
                         case "Preparando":
                             elemento.classList.add("preparando");
                             break;
-                        default:
+                        case "Entregue":
                             elemento.classList.add("entregue");
+                            break;
+                        case "Em Trânsito":
+                            elemento.classList.add("transito");
+                            break;
                     }
                 }
             });
