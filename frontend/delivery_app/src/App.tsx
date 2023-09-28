@@ -20,6 +20,7 @@ function App() {
             <Route path="/customer/order" element={ <Order/> }/>
             <Route path="/customer/order/:id" element={ <DetailsOrder/> }/>
             <Route path="/seller/orders" element={ <Order/> }/>
+            <Route path="/seller/order/:id" element={ <DetailsOrder/> }/>
           </Routes>
         </Router>
       </DeliveryProvider>
