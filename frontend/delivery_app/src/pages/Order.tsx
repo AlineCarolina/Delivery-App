@@ -7,17 +7,24 @@ import momentjs from 'moment';
 import "../styles/Order.css";
 
 function Order() {
-    const [orders, setOrders] = useState<any[]>([]);
+    const [orders, setOrders] = useState([]);
+    const [roleST, setRoleST] = useState("");
+    const [linkTo, setLinkTo] = useState("");
 
     useEffect(() => {
         const getData = async () => {
             const clientId = storageFuncs.get("user");
+            setRoleST(clientId.newUser.role)
+            
             if (clientId.newUser.role === "customer") {
                 const data = await requestData(`/sale/customer/${clientId.newUser.id}`);
-                setOrders(data as any[]);
+                setOrders(data);
+                
+                setLinkTo("/customer/order/");
             } else {
                 const data = await requestData(`/sale/seller/${clientId.newUser.id}`);
-                setOrders(data as any[]);
+                setOrders(data);
+                setLinkTo("/seller/order/");
             }
             
         }
@@ -54,7 +61,7 @@ function Order() {
             <div className="div-order">
                 { orders && orders.map((order: any) => (
                     <section key={order.id} className="section-order">
-                        <Link to={ `/customer/order/${order.id}` } className="link-order">
+                        <Link to={ `${linkTo}${order.id}` } className="link-order">
                             <div className="div-nmr-ord">
                                 <h2>{ `Pedido: ${order.id}` }</h2>
                             </div>

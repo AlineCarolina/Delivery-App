@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DeliveryContext from "../context/deliveryContext";
 import "../styles/OrderProduct.css";
 

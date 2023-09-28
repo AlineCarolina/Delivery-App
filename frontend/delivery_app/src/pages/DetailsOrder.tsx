@@ -1,27 +1,35 @@
 import { useParams } from "react-router-dom";
 import Header from "../componets/Header";
 import { putData, requestData } from "../services/requests";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import momentjs from 'moment';
 import OrderProduct from "../componets/OrderProduct";
 import "../styles/DetailsOrder.css";
+import DeliveryContext from "../context/deliveryContext";
 
 function DetailsOrder() {
     const { id } = useParams();
-    const [order, setOrder] = useState([]);
-    console.log(order);
+    const [order, setOrder] = useState(null);
+    const { getSaleDetails, getSale } = useContext(DeliveryContext);
+
 
     useEffect(() => {
-        requestData(`/sale/${id}`).then((data) => {
-            setOrder(data);
-        });
-        }, []);
+        const fetchData = async () => {
+            try {
+                await getSaleDetails(id);
+                setOrder(getSale);
+            } catch (error) {
+                console.error("Erro ao obter detalhes do pedido:", error);
+            }
+        };
+
+        fetchData();
+        }, [id, getSaleDetails]);
 
         useEffect(() => {
             const elementosStatus = document.getElementById("div-status-details");
             const h3Status = elementosStatus?.querySelector("h3");
             const textStatus = h3Status?.textContent;
-                console.log(textStatus);
                 switch (textStatus) {
                     case "Pendente":
                         elementosStatus?.classList.add("pendente");
@@ -39,9 +47,13 @@ function DetailsOrder() {
         }, [order])
 
     const changeStatus = async ({ status }: any) => {
-        await putData(`/sale/${order.id}`, { status });
-        setOrder({ ...order, status });
-      };
+        try {
+            await putData(`/sale/${order.id}`, { status });
+            setOrder({ ...order, status });
+        } catch (error) {
+            console.error("Erro ao atualizar status:", error);
+        }
+    };
 
     return (
         <>
