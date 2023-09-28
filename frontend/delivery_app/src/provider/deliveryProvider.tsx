@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import DeliveryContext from "../context/deliveryContext";
 import storageFuncs from "../utils/storageFuncs";
+import { requestData } from "../services/requests";
 
 function DeliveryProvider({ children }: any) {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0.00);
+    const [getSale, setGetSale] = useState([]);
 
     useEffect(() => {
         const cartStorage = storageFuncs.get("cart");
@@ -22,13 +24,22 @@ function DeliveryProvider({ children }: any) {
         setTotal(storageFuncs.getTotal(cart));
       }, [cart]);
 
+    const getSaleDetails = async (id:any) => {
+        await requestData(`/sale/${id}`).then((data) => {
+            setGetSale(data)
+        return data
+        });
+    }
+
     return (
         <DeliveryContext.Provider
             value={ {
                 cart,
                 setCart,
                 setNewCartValue,
-                total
+                total,
+                getSaleDetails,
+                getSale,
             } }
         >
             { children }
