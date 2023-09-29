@@ -10,21 +10,17 @@ import DeliveryContext from "../context/deliveryContext";
 function DetailsOrder() {
     const { id } = useParams();
     const [order, setOrder] = useState(null);
-    const { getSaleDetails, getSale } = useContext(DeliveryContext);
-
+    const { setCart } = useContext(DeliveryContext);
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                await getSaleDetails(id);
-                setOrder(getSale);
-            } catch (error) {
-                console.error("Erro ao obter detalhes do pedido:", error);
-            }
+            await requestData(`/sale/${id}`).then((data) => {
+                setOrder(data);
+                setCart(data.products)
+            })
         };
-
         fetchData();
-        }, [id, getSaleDetails]);
+        }, []);
 
         useEffect(() => {
             const elementosStatus = document.getElementById("div-status-details");
@@ -44,7 +40,7 @@ function DetailsOrder() {
                         elementosStatus?.classList.add("transito");
                         break;
                 }
-        }, [order])
+        }, [order]);
 
     const changeStatus = async ({ status }: any) => {
         try {

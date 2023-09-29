@@ -1,9 +1,17 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import DeliveryContext from "../context/deliveryContext";
 import "../styles/OrderProduct.css";
+import storageFuncs from "../utils/storageFuncs";
 
 function OrderProduct({ removeBtn }:any) {
     const { cart, setCart, total } = useContext(DeliveryContext);
+    const [roleST, setRoleST] = useState("");
+
+    useEffect(() => {
+            const clientId = storageFuncs.get("user");
+            setRoleST(clientId.newUser.role);
+        console.log(roleST);
+        }, []);
 
     return (
         <div className="div-order-product">
@@ -25,9 +33,27 @@ function OrderProduct({ removeBtn }:any) {
                                 <tr key={ product.id }>
                                     <td>{ index + 1 }</td>
                                     <td>{ product.name }</td>
-                                    <td>{ product.quantity }</td>
+                                    {
+                                        roleST === "seller" && (
+                                            <td>{ product.saleProduct.quantity }</td>
+                                        )
+                                    }
+                                    {
+                                        roleST === "customer" && (
+                                            <td>{ product.quantity }</td>
+                                        )
+                                    }
                                     <td>{ product.price.replace(".", ",") }</td>
-                                    <td>{( product.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
+                                    {
+                                        roleST === "seller" && (
+                                            <td>{( product.saleProduct.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
+                                        )
+                                    }
+                                    {
+                                        roleST === "customer" && (
+                                            <td>{( product.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
+                                        )
+                                    }
                                         { removeBtn && (
                                             
                                         <td>

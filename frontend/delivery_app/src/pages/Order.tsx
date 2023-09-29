@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../componets/Header";
-import { requestData } from "../services/requests";
+import { requestData, setToken } from "../services/requests";
 import storageFuncs from "../utils/storageFuncs";
 import { Link } from "react-router-dom";
 import momentjs from 'moment';
@@ -19,7 +19,6 @@ function Order() {
             if (clientId.newUser.role === "customer") {
                 const data = await requestData(`/sale/customer/${clientId.newUser.id}`);
                 setOrders(data);
-                
                 setLinkTo("/customer/order/");
             } else {
                 const data = await requestData(`/sale/seller/${clientId.newUser.id}`);
@@ -72,6 +71,11 @@ function Order() {
                                 <h3 className="h3-date">{ momentjs(order.sale_date).format('DD/MM/YYYY') }</h3>
                                 <h3>R$ { order.total_price.replace('.', ',') }</h3>
                             </div>
+                            {
+                                roleST === "seller" && (
+                                    <p>{`${order.delivery_address}, ${order.delivery_number}`}</p>
+                                )
+                            }
                         </Link>
                     </section>
                 )) }

@@ -27,16 +27,6 @@ function Checkout() {
         if (!user) {
             navigate("/login")
         } else {
-            console.log({
-                saleInfo: {
-                    user_id: user.newUser.id,
-                    seller_id: 2,
-                    total_price: Number(total.replace(",", ".")),
-                    ...formCheckout,
-                    status: "Pendente",
-                },
-                products: cart.map(({ id, quantity }: any) => ({ product_id: id, quantity })),
-            });
             
             const saleId = await postData(
                 "/sale",
@@ -51,6 +41,9 @@ function Checkout() {
                     products: cart.map(({ id, quantity }: any) => ({ id, quantity })),
                 },
             );
+            setCart(null);
+            localStorage.removeItem("cart");
+            navigate(`/customer/order/${saleId}`)
         }
     }
 
