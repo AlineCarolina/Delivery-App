@@ -10,8 +10,8 @@ function OrderProduct({ removeBtn }:any) {
     useEffect(() => {
             const clientId = storageFuncs.get("user");
             setRoleST(clientId.newUser.role);
-        console.log(roleST);
         }, []);
+
 
     return (
         <div className="div-order-product">

@@ -6,20 +6,35 @@ import momentjs from 'moment';
 import OrderProduct from "../componets/OrderProduct";
 import "../styles/DetailsOrder.css";
 import DeliveryContext from "../context/deliveryContext";
+import storageFuncs from "../utils/storageFuncs";
 
 function DetailsOrder() {
     const { id } = useParams();
     const [order, setOrder] = useState(null);
-    const { setCart } = useContext(DeliveryContext);
+    const { setCart, cart, setTotal } = useContext(DeliveryContext);
+    const [roleST, setRoleST] = useState("");
 
     useEffect(() => {
-        const fetchData = async () => {
-            await requestData(`/sale/${id}`).then((data) => {
-                setOrder(data);
-                setCart(data.products)
-            })
-        };
-        fetchData();
+        const clientId = storageFuncs.get("user");
+            setRoleST(clientId.newUser.role);
+        if (roleST === "customer") {
+            const fetchData = async () => {
+                await requestData(`/sale/${id}`).then((data) => {
+                    setOrder(data);
+                })
+            };
+            fetchData();
+        } else {
+            const fetchData = async () => {
+                await requestData(`/sale/${id}`).then((data) => {
+                    setOrder(data);
+                    setCart(data.products);
+                })
+            };
+
+            fetchData();
+        }
+        
         }, []);
 
         useEffect(() => {

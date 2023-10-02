@@ -10,7 +10,6 @@ function DeliveryProvider({ children }: any) {
         const cartStorage = storageFuncs.get("cart");
         setCart(cartStorage || []);
         setTotal(storageFuncs.getTotal(cartStorage) || 0.0);
-
     }, []);
 
     const setNewCartValue = (newValue: any) => {
@@ -30,6 +29,7 @@ function DeliveryProvider({ children }: any) {
                 setCart,
                 setNewCartValue,
                 total,
+                setTotal,
             } }
         >
             { children }

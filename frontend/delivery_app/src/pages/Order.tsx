@@ -23,6 +23,8 @@ function Order() {
             } else {
                 const data = await requestData(`/sale/seller/${clientId.newUser.id}`);
                 setOrders(data);
+                console.log(orders);
+                
                 setLinkTo("/seller/order/");
             }
             

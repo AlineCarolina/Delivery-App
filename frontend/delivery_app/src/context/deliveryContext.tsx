@@ -5,6 +5,7 @@ type DeliveryContextType = {
     setCart: any;
     setNewCartValue: any;
     total: any;
+    setTotal: any;
 };
 
 const DeliveryContext = React.createContext({} as DeliveryContextType);
