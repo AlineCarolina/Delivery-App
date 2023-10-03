@@ -5,6 +5,7 @@ import storageFuncs from "../utils/storageFuncs";
 function DeliveryProvider({ children }: any) {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0.00);
+    const [totalSeller, setTotalSeller] = useState(null)
 
     useEffect(() => {
         const cartStorage = storageFuncs.get("cart");
@@ -30,6 +31,8 @@ function DeliveryProvider({ children }: any) {
                 setNewCartValue,
                 total,
                 setTotal,
+                totalSeller,
+                setTotalSeller
             } }
         >
             { children }
