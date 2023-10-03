@@ -6,35 +6,30 @@ import momentjs from 'moment';
 import OrderProduct from "../componets/OrderProduct";
 import "../styles/DetailsOrder.css";
 import DeliveryContext from "../context/deliveryContext";
-import storageFuncs from "../utils/storageFuncs";
 
 function DetailsOrder() {
+    const { setCart, setTotalSeller, totalSeller } = useContext(DeliveryContext);
     const { id } = useParams();
     const [order, setOrder] = useState(null);
-    const { setCart, cart, setTotal } = useContext(DeliveryContext);
-    const [roleST, setRoleST] = useState("");
 
     useEffect(() => {
-        const clientId = storageFuncs.get("user");
-            setRoleST(clientId.newUser.role);
-        if (roleST === "customer") {
-            const fetchData = async () => {
-                await requestData(`/sale/${id}`).then((data) => {
-                    setOrder(data);
+            requestData(`/sale/${id}`).then((data) => {
+                const totalPrice = data.total_price;
+                const produtos = data.products.map((item) => {
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        quantity: item.saleProduct.quantity,
+                        url_image: item.url_image,
+                        totalPrice,
+                    }
                 })
-            };
-            fetchData();
-        } else {
-            const fetchData = async () => {
-                await requestData(`/sale/${id}`).then((data) => {
-                    setOrder(data);
-                    setCart(data.products);
-                })
-            };
-
-            fetchData();
-        }
-        
+                setOrder(data);
+                setCart(produtos);
+                setTotalSeller(parseFloat(totalPrice).toFixed(2).replace(".", ","))
+                console.log(totalSeller);
+            })
         }, []);
 
         useEffect(() => {

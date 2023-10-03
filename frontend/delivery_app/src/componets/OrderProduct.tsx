@@ -4,14 +4,13 @@ import "../styles/OrderProduct.css";
 import storageFuncs from "../utils/storageFuncs";
 
 function OrderProduct({ removeBtn }:any) {
-    const { cart, setCart, total } = useContext(DeliveryContext);
+    const { cart, setCart, total, totalSeller } = useContext(DeliveryContext);
     const [roleST, setRoleST] = useState("");
 
     useEffect(() => {
             const clientId = storageFuncs.get("user");
             setRoleST(clientId.newUser.role);
         }, []);
-
 
     return (
         <div className="div-order-product">
@@ -33,27 +32,9 @@ function OrderProduct({ removeBtn }:any) {
                                 <tr key={ product.id }>
                                     <td>{ index + 1 }</td>
                                     <td>{ product.name }</td>
-                                    {
-                                        roleST === "seller" && (
-                                            <td>{ product.saleProduct.quantity }</td>
-                                        )
-                                    }
-                                    {
-                                        roleST === "customer" && (
-                                            <td>{ product.quantity }</td>
-                                        )
-                                    }
+                                    <td>{ product.quantity }</td>
                                     <td>{ product.price.replace(".", ",") }</td>
-                                    {
-                                        roleST === "seller" && (
-                                            <td>{( product.saleProduct.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
-                                        )
-                                    }
-                                    {
-                                        roleST === "customer" && (
-                                            <td>{( product.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
-                                        )
-                                    }
+                                    <td>{( product.quantity * product.price ).toFixed(2).replace(".", ",")}</td>
                                         { removeBtn && (
                                             
                                         <td>
@@ -75,7 +56,16 @@ function OrderProduct({ removeBtn }:any) {
                 </tbody>
             </table>
             <div className="div-h2-total">
-                <h2 className="h2-total">{`Total: R$ ${total}`}</h2>
+                {
+                    roleST === "customer" && (
+                        <h2 className="h2-total">{`Total: R$ ${total}`}</h2>
+                    )
+                }
+                {
+                    roleST === "seller" && (
+                        <h2 className="h2-total">{`Total: R$ ${totalSeller}`}</h2>
+                    )
+                }
             </div>
         </div>
     )
