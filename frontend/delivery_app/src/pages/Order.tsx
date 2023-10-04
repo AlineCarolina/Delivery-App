@@ -14,7 +14,7 @@ function Order() {
     useEffect(() => {
         const getData = async () => {
             const clientId = storageFuncs.get("user");
-            setRoleST(clientId.newUser.role)
+            setRoleST(clientId.newUser.role);
             
             if (clientId.newUser.role === "customer") {
                 const data = await requestData(`/sale/customer/${clientId.newUser.id}`);

@@ -20,3 +20,8 @@ export const putData = async (endpoint:string, body:any) => {
     const { data } = await api.put(endpoint, body);
     return data;
 };
+
+export const deleteData = async (endpoint: any) => {
+    const { data } = await api.delete(endpoint);
+    return data;
+};
