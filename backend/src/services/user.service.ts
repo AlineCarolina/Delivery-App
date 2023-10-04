@@ -6,7 +6,11 @@ import JWT from '../helpers/JWTToken';
 import { Op } from 'sequelize';
 
 export default class UserService {
-    public static async register({ username, email, password, role = "customer" }: UserInterface){
+    public static async register({ username, email, password, role }: UserInterface){
+        if (!role || role.trim() === "") {
+            role = "customer";
+        }
+
         const data = await User.findOne({ where: { email, username } });
         if(data) return { response: { message: messageErrors.USER_REGISTER }, code: statusCodes.CONFLICT };
 
