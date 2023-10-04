@@ -6,13 +6,19 @@ import momentjs from 'moment';
 import OrderProduct from "../componets/OrderProduct";
 import "../styles/DetailsOrder.css";
 import DeliveryContext from "../context/deliveryContext";
+import storageFuncs from "../utils/storageFuncs";
 
 function DetailsOrder() {
     const { setCart, setTotalSeller, totalSeller } = useContext(DeliveryContext);
     const { id } = useParams();
     const [order, setOrder] = useState(null);
+    const [roleST, setRoleST] = useState("");
+
 
     useEffect(() => {
+        const clientId = storageFuncs.get("user");
+        setRoleST(clientId.newUser.role);
+
             requestData(`/sale/${id}`).then((data) => {
                 const totalPrice = data.total_price;
                 const produtos = data.products.map((item) => {
@@ -73,14 +79,37 @@ function DetailsOrder() {
                         <div id="div-status-details">
                             <h3>{ order.status }</h3>
                         </div>
-
-                        <button
-                            type="button"
-                            onClick={ () => changeStatus({ status: 'Entregue' }) }
-                            className="btn-entregue"
-                        >
-                            Marcar como entregue
-                        </button>
+                        {
+                            roleST === "customer" && (
+                                <button
+                                type="button"
+                                onClick={ () => changeStatus({ status: 'Entregue' }) }
+                                className="btn-entregue"
+                                >
+                                    Marcar como entregue
+                                </button>
+                            )
+                        }
+                        {
+                            roleST === "seller" && (
+                                <>
+                                    <button
+                                    type="button"
+                                    onClick={ () => changeStatus({ status: 'Preparando' }) }
+                                    className="btn-entregue"
+                                    >
+                                        Preparar Pedido
+                                    </button>
+                                    <button
+                                    type="button"
+                                    onClick={ () => changeStatus({ status: 'Em Trânsito' }) }
+                                    className="btn-entregue"
+                                    >
+                                        Saiu para entrega
+                                    </button>
+                                </>
+                            )
+                        }
                     </div>
                 ) }
                 <div className="div-order-detail-product">
