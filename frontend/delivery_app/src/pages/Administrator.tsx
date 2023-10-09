@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../componets/Header";
 import { deleteData, postData, requestData } from "../services/requests";
+import "../styles/Administrator.css";
 
 const roles = [
         { name: 'Vendedor', role: 'seller' },
@@ -51,60 +52,63 @@ function Administrator() {
     return (
         <>
             <Header/>
-            <main>
-                <label htmlFor="name">
-                    <h3>Nome</h3>
-                    <input
-                        name="name"
-                        id="name"
-                        type="text"
-                        value={ registerForm.name }
-                        onChange={ (e) => handleChange(e.target) }
-                    />
-                </label>
-                <label htmlFor="email">
-                    <h3>Email</h3>
-                    <input
-                        name="email"
-                        id="email"
-                        type="text"
-                        value={ registerForm.email }
-                        onChange={ (e) => handleChange(e.target) }
-                    />
-                </label>
-                <label htmlFor="password">
-                    <h3>Senha</h3>
-                    <input
-                        name="password"
-                        id="password"
-                        type="password"
-                        placeholder="******"
-                        value={ registerForm.password }
-                        onChange={ (e) => handleChange(e.target) }
-                    />
-                </label>
-                <label htmlFor="role">
-                    <h3>Tipo</h3>
-                    <select
-                        onChange={ (ev) => handleChange(ev.target) }
-                        name="role"
-                        id="role"
+            <main className="main-adm">
+                <div className="form">
+                    <label htmlFor="name">
+                        <h3>Nome</h3>
+                        <input
+                            name="name"
+                            id="name"
+                            type="text"
+                            value={ registerForm.name }
+                            onChange={ (e) => handleChange(e.target) }
+                        />
+                    </label>
+                    <label htmlFor="email">
+                        <h3>Email</h3>
+                        <input
+                            name="email"
+                            id="email"
+                            type="text"
+                            value={ registerForm.email }
+                            onChange={ (e) => handleChange(e.target) }
+                        />
+                    </label>
+                    <label htmlFor="password">
+                        <h3>Senha</h3>
+                        <input
+                            name="password"
+                            id="password"
+                            type="password"
+                            placeholder="******"
+                            value={ registerForm.password }
+                            onChange={ (e) => handleChange(e.target) }
+                        />
+                    </label>
+                    <label htmlFor="role">
+                        <h3>Tipo</h3>
+                        <select
+                            onChange={ (ev) => handleChange(ev.target) }
+                            name="role"
+                            id="role"
+                        >
+                            {roles.map(({ name, role }) => (
+                                <option key={ name } value={ role }>{ name }</option>))}
+                        </select>
+                    </label>
+                    <button
+                        type="button"
+                        onClick={ () => handleRegister() }
                     >
-                        {roles.map(({ name, role }) => (
-                            <option key={ name } value={ role }>{ name }</option>))}
-                    </select>
-                </label>
-                <button
-                    type="button"
-                    onClick={ () => handleRegister() }
-                >
-                    Cadastrar
-                </button>
-                { errorRegister && (
-                    <p>
-                    Usuario já existe
-                    </p>
-                )}
+                        Cadastrar
+                    </button>
+                    { errorRegister && (
+                        <p>
+                        Usuario já existe
+                        </p>
+                    )}
+                </div>
+                
                 <div>
                     <h2>Lista de Usuarios</h2>
                     <table>
