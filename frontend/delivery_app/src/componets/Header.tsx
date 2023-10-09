@@ -27,7 +27,7 @@ function Header() {
         localStorage.removeItem("user");
         setCart(null);
         localStorage.removeItem("cart");
-        window.location.reload();
+        navigate("/login");
     }
 
     const setDivLogout = () => {
@@ -49,7 +49,6 @@ function Header() {
             </div>
             {login ? (
                         <div className="div-header">
-                                
                                 {
                                     roleST === "customer" && (
                                         <>

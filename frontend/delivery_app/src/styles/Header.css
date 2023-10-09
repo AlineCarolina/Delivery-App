@@ -46,8 +46,7 @@ header {
 }
 
 .btn-login {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 0;
     font-size: .875rem;
     background-color: transparent;
     text-transform: capitalize;
