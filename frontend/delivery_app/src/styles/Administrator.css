@@ -1,14 +1,53 @@
-.main-adm {
-    border: 1px solid red;
+.div-adm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.main-adm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
 .form {
+    width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 20px;
+    padding: 15px;
+    padding-bottom: 30px;
 }
+
+.h2-adm {
+    align-self: flex-start;
+}
+
+.label-adm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.label-adm input {
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid rgb(97, 97, 97);
+    padding: 0;
+    width: 170px;
+    height: 42px;
+}
+
+.label-adm select {
+    height: 40px;
+    width: 170px;
+    height: 42px;
+}
+
