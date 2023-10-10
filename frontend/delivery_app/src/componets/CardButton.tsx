@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import DeliveryContext from "../context/deliveryContext";
-import "../styles/CardButton.css"
+import "../styles/CardButton.css";
 
 function CardButton({ product }: any) { //obj
     const [quantity, setQuantity] = useState(0);
@@ -27,7 +27,6 @@ function CardButton({ product }: any) { //obj
         } catch (error) {
             setNewCartValue([...cart, setValue]);
         }
-        
     }
 
     return (

@@ -33,8 +33,7 @@ function DetailsOrder() {
                 })
                 setOrder(data);
                 setCart(produtos);
-                setTotalSeller(parseFloat(totalPrice).toFixed(2).replace(".", ","))
-                console.log(totalSeller);
+                setTotalSeller(parseFloat(totalPrice).toFixed(2).replace(".", ","));
             })
         }, []);
 

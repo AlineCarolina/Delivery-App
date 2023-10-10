@@ -42,7 +42,7 @@ function Checkout() {
             );
             setCart(null);
             localStorage.removeItem('cart');
-            navigate(`/customer/order/${saleId}`)
+            navigate(`/customer/order/${saleId}`);
         }
     }
 

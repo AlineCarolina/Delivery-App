@@ -6,26 +6,39 @@ import DeliveryContext from "../context/deliveryContext";
 import "../styles/CardProduct.css"
 import { useNavigate } from "react-router-dom";
 import svgCart from "../images/shopping-cart-outline-svgrepo-com.svg";
+import storageFuncs from "../utils/storageFuncs";
 
 function CardProduct() {
     const [products, setProducts] = useState<Products[]>([]);
-    const { total } = useContext(DeliveryContext);
+    const { total, setTotal } = useContext(DeliveryContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         requestData("/products").then((data) => setProducts(data));
-
     }, []);
 
     useEffect(() => {
-        const cartBtn = document.getElementById("cart-btn");
+        const cartStorage = storageFuncs.get("cart");
+        if (!cartStorage) {
+            setTotal("0,00")
+        }
 
+        const cartBtn = document.getElementById("cart-btn");
         if (total === "0,00") {
             cartBtn!.style.display = "none";
         } else {
             cartBtn!.style.display = "block";
         }
-    }, [total])
+    }, [total]);
+
+    const handleClick = () => {
+        const userData = storageFuncs.get("user");
+        if(!userData) {
+            navigate("/login")
+        } else {
+            navigate("/customer/checkout")
+        }
+    };
 
     return (
         <div className="div_page_products">
@@ -52,7 +65,7 @@ function CardProduct() {
             <button
                 id="cart-btn"
                 type="button"
-                onClick={ () => navigate('/customer/checkout') }
+                onClick={ () => handleClick() }
                 disabled={ total === '0,00' }
             >
                 <div className="div-cart-btn">
