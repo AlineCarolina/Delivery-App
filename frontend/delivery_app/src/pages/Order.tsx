@@ -70,15 +70,17 @@ function Order() {
                                 <h3 id="h3-status">{ order.status }</h3>
                             </div>
                             <div className="div-date-ord">
-                                <h3 className="h3-date">{ momentjs(order.sale_date).format('DD/MM/YYYY') }</h3>
-                                <h3>R$ { order.total_price.replace('.', ',') }</h3>
+                                <p className="h3-date">{ momentjs(order.sale_date).format('DD/MM/YYYY') }</p>
+                                <p>R$ { order.total_price.replace('.', ',') }</p>
                             </div>
-                            {
+                        </Link>
+                        {
                                 roleST === "seller" && (
-                                    <p>{`${order.delivery_address}, ${order.delivery_number}`}</p>
+                                    <div className="order-address">
+                                        <p>Endereço: {`${order.delivery_address}, ${order.delivery_number}`}</p>
+                                    </div>
                                 )
                             }
-                        </Link>
                     </section>
                 )) }
             </div>
