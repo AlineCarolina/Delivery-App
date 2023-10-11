@@ -100,6 +100,7 @@ function Administrator() {
                         <button
                             type="button"
                             onClick={ () => handleRegister() }
+                            className="btn-adm"
                         >
                             Cadastrar
                         </button>

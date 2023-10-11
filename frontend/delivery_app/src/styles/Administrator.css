@@ -43,11 +43,26 @@
     padding: 0;
     width: 170px;
     height: 42px;
+    border-radius: 10px;
 }
 
 .label-adm select {
     height: 40px;
     width: 170px;
     height: 42px;
+    border-radius: 10px;
+    background-color: #242424;
 }
 
+.option-adm {
+    background-color: #242424;
+}
+
+ .btn-adm {
+    height: 40px;
+    width: 170px;
+    height: 42px;
+    align-self: last baseline;
+    border-radius: 10px;
+    background-color: transparent;
+ }
