@@ -53,7 +53,7 @@ function Administrator() {
     };
 
     const deleteUser = async (id: number) => {
-        await deleteData(`/users/${id}`);
+        await deleteData(`/user/${id}`);
         setUsers(users.filter((user) => user.id !== id));
     };
 
@@ -123,9 +123,9 @@ function Administrator() {
                         )}
                     </div>
                     
-                    <div>
+                    <div className="div-list">
                         <h2>Lista de Usuarios</h2>
-                        <table>
+                        <table className="users-list">
                             <thead>
                                 <tr>
                                     <th>Item</th>
@@ -142,7 +142,7 @@ function Administrator() {
                                     { index + 1 }
                                 </td>
                                 <td>
-                                    { user.name }
+                                    { user.username }
                                 </td>
                                 <td>
                                     { user.email }
@@ -154,6 +154,7 @@ function Administrator() {
                                     <button
                                     type="button"
                                     onClick={ () => deleteUser(user.id) }
+                                    className="btn-delete-usr"
                                     >
                                     Excluir
                                     </button>

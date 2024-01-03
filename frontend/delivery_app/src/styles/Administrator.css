@@ -58,11 +58,42 @@
     background-color: #242424;
 }
 
- .btn-adm {
+.btn-adm {
     height: 40px;
     width: 170px;
     height: 42px;
     align-self: last baseline;
     border-radius: 10px;
     background-color: transparent;
- }
+}
+
+.btn-adm:hover {
+    color: #FF0404;
+    border: #FF0404 1px solid;
+}
+
+.div-list {
+    width: 100%;
+}
+
+.users-list {
+    width: 100%;
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 20px;
+    padding: 15px;
+    padding-bottom: 30px;
+}
+
+.btn-delete-usr {
+    height: 40px;
+    width: 170px;
+    height: 42px;
+    align-self: last baseline;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.btn-delete-usr:hover {
+    color: #FF0404;
+    border: #FF0404 1px solid;
+}
