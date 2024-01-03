@@ -97,3 +97,9 @@
     color: #FF0404;
     border: #FF0404 1px solid;
 }
+
+#loader_gif {
+    width: 30%;
+    position: relative;
+    top: 70px;
+}

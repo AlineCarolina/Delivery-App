@@ -62,5 +62,7 @@ svg:hover {
 }
 
 #loader_gif {
-    width: 30%; 
+    width: 30%;
+    position: relative;
+    top: 70px;
 }

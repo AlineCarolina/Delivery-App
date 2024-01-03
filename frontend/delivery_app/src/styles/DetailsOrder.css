@@ -72,3 +72,9 @@
 .transito {
     background-color: #0e5ec7;
 }
+
+#loader_gif {
+    width: 30%;
+    position: relative;
+    top: 70px;
+}

@@ -48,3 +48,9 @@
     border: 1px solid #FF0404;
     color: #FF0404;
 }
+
+#loader_gif {
+    width: 30%;
+    position: relative;
+    top: 70px;
+}
