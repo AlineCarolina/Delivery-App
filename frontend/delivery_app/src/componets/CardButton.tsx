@@ -18,7 +18,7 @@ function CardButton({ product }: any) { //obj
     const handleQuantity = (newQuantity: any) => {
         setQuantity(newQuantity);
         const setValue = { ...product, quantity: newQuantity };
-        if (!cart.length) return setNewCartValue([setValue]);
+        if (!cart) return setNewCartValue([setValue]);
 
         try {
             const alreadyOnCart = cart.find(({ id }: any) => id === product.id);

@@ -60,3 +60,7 @@
 svg:hover {
     fill: red;
 }
+
+#loader_gif {
+    width: 30%; 
+}

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import Header from "../componets/Header";
-import { requestData, setToken } from "../services/requests";
+import { requestData } from "../services/requests";
 import storageFuncs from "../utils/storageFuncs";
 import { Link } from "react-router-dom";
 import momentjs from 'moment';
 import "../styles/Order.css";
+import loaderGif from "../images/loader.gif";
 
 function Order() {
     const [orders, setOrders] = useState([]);
     const [roleST, setRoleST] = useState("");
     const [linkTo, setLinkTo] = useState("");
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
         const getData = async () => {
@@ -18,12 +20,19 @@ function Order() {
             
             if (clientId.newUser.role === "customer") {
                 const data = await requestData(`/sale/customer/${clientId.newUser.id}`);
-                setOrders(data);
-                setLinkTo("/customer/order/");
+                setTimeout(() => {
+                    setOrders(data);
+                    setLinkTo("/customer/order/");
+                    setLoad(false);
+                }, 2000)
+                
             } else {
                 const data = await requestData(`/sale/seller/${clientId.newUser.id}`);
-                setOrders(data);
-                setLinkTo("/seller/order/");
+                setTimeout(() => {
+                    setOrders(data);
+                    setLinkTo("/seller/order/");
+                    setLoad(false);
+                }, 2000)
             }
         }
         getData();
@@ -57,7 +66,11 @@ function Order() {
         <>
             <Header/>
             <div className="div-order">
-                { orders && orders.map((order: any) => (
+                { load ? (
+                <img src={loaderGif} id="loader_gif"/>
+            ) : 
+            (
+                orders && orders.map((order: any) => (
                     <section key={order.id} className="section-order">
                         <Link to={ `${linkTo}${order.id}` } className="link-order">
                             <div className="div-nmr-ord">
@@ -79,7 +92,7 @@ function Order() {
                                 )
                             }
                     </section>
-                )) }
+                ))) }
             </div>
         </>
     )

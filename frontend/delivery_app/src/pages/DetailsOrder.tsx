@@ -7,19 +7,22 @@ import OrderProduct from "../componets/OrderProduct";
 import "../styles/DetailsOrder.css";
 import DeliveryContext from "../context/deliveryContext";
 import storageFuncs from "../utils/storageFuncs";
+import loaderGif from "../images/loader.gif";
 
 function DetailsOrder() {
     const { setCart, setTotalSeller, totalSeller } = useContext(DeliveryContext);
     const { id } = useParams();
     const [order, setOrder] = useState(null);
     const [roleST, setRoleST] = useState("");
-
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
         const clientId = storageFuncs.get("user");
         setRoleST(clientId.newUser.role);
 
-            requestData(`/sale/${id}`).then((data) => {
+        const fetchData = async () => {
+            const data = await requestData(`/sale/${id}`);
+            setTimeout(() => {
                 const totalPrice = data.total_price;
                 const produtos = data.products.map((item) => {
                     return {
@@ -34,7 +37,10 @@ function DetailsOrder() {
                 setOrder(data);
                 setCart(produtos);
                 setTotalSeller(parseFloat(totalPrice).toFixed(2).replace(".", ","));
-            })
+                setLoad(false)
+            }, 2000)
+        }
+        fetchData();   
         }, []);
 
         useEffect(() => {
@@ -69,6 +75,9 @@ function DetailsOrder() {
     return (
         <>
             <Header/>
+            { load ? (
+                <img src={loaderGif} id="loader_gif"/>
+            ) : (
             <main className="main-details">
             <h2>Detalhes do Pedido</h2>
                 { order && (
@@ -115,6 +124,7 @@ function DetailsOrder() {
                     <OrderProduct removeBtn={false}/>
                 </div>
             </main>
+            )}
         </>
     )
 }

@@ -7,14 +7,23 @@ import "../styles/CardProduct.css"
 import { useNavigate } from "react-router-dom";
 import svgCart from "../images/shopping-cart-outline-svgrepo-com.svg";
 import storageFuncs from "../utils/storageFuncs";
+import loaderGif from "../images/loader.gif";
 
 function CardProduct() {
     const [products, setProducts] = useState<Products[]>([]);
     const { total, setTotal } = useContext(DeliveryContext);
     const navigate = useNavigate();
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
-        requestData("/products").then((data) => setProducts(data));
+        const fetchData = async () => {
+            const response = await requestData("/products");
+            setTimeout(() => {
+                setProducts(response);
+                setLoad(false);
+            }, 2000);
+        }
+        fetchData();
     }, []);
 
     useEffect(() => {
@@ -42,7 +51,10 @@ function CardProduct() {
 
     return (
         <div className="div_page_products">
-            {
+            { load ? (
+                <img src={loaderGif} id="loader_gif"/>
+            ) : 
+            (
                 products && products.map((item) => (
                     <div key={ item.id } className="div_item_product">
                         <div>
@@ -61,7 +73,7 @@ function CardProduct() {
                         </div>
                     </div>
                 ))
-            }
+            ) }
             <button
                 id="cart-btn"
                 type="button"

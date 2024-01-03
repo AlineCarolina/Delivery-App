@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../componets/Header";
 import OrderProduct from "../componets/OrderProduct";
 import { postData } from "../services/requests";
@@ -6,6 +6,7 @@ import DeliveryContext from "../context/deliveryContext";
 import storageFuncs from "../utils/storageFuncs";
 import { useNavigate } from "react-router-dom";
 import "../styles/Checkout.css";
+import loaderGif from "../images/loader.gif";
 
 function Checkout() {
     const [formCheckout, setFormCheckout] = useState({
@@ -14,6 +15,13 @@ function Checkout() {
     });
     const { total, cart, setCart } = useContext(DeliveryContext);
     const navigate = useNavigate();
+    const [load, setLoad] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoad(false);
+        }, 2000)
+    }, []);
 
     const handleChange = ({ value, name }: any) => {
         setFormCheckout((prev) => ({
@@ -50,6 +58,10 @@ function Checkout() {
         <>
             <Header/>
             <main className="main-checkout">
+                { load ? (
+                    <img src={loaderGif} id="loader_gif"/>
+                ) : (
+                    <>
                 <h1>Finalizar Pedido</h1>
                 <OrderProduct removeBtn />
                 <h2>Endereço para Entrega</h2>
@@ -83,8 +95,8 @@ function Checkout() {
                         Finalizar Pedido
                     </button>
                 </div>
-                <div>
-                </div>
+                </>
+                )}
             </main>
         </>
     )

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../componets/Header";
 import { deleteData, postData, requestData } from "../services/requests";
 import "../styles/Administrator.css";
+import loaderGif from "../images/loader.gif";
 
 const roles = [
         { name: 'Vendedor', role: 'seller' },
@@ -20,9 +21,17 @@ function Administrator() {
     const [registerForm, setRegisterForm] = useState(defaultForm);
     const [users, setUsers] = useState([]);
     const [errorRegister, setErrorRegister] = useState(false);
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
-        requestData("/users").then((data) => setUsers(data));
+        const fetchData = async () => {
+            const response = await requestData("/users");
+            setTimeout(() => {
+                setUsers(response)
+                setLoad(false);
+            }, 2000);
+    }
+    fetchData();
     }, []);
 
     const handleChange = ({ value, name }: any) => {
@@ -50,8 +59,11 @@ function Administrator() {
 
     return (
         <>
-            <Header/>
+            <Header/> 
             <div className="div-adm">
+            { load ? (
+                <img src={loaderGif} id="loader_gif"/>
+            ) : (
                 <main className="main-adm">
                     <h2 className="h2-adm">Cadastrar novo usuário</h2>
                     <div className="form">
@@ -152,6 +164,7 @@ function Administrator() {
                         </table>
                     </div>
                 </main>
+                ) }
             </div>
         </>
     )
