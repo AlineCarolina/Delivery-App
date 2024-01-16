@@ -59,7 +59,7 @@ function CardProduct() {
                     <div key={ item.id } className="div_item_product">
                         <div>
                             <img
-                                src={ item.url_image }
+                                src={ `http://localhost:3000${item.url_image}` }
                                 alt={ item.name }
                                 className="img_item_product"
                             />
