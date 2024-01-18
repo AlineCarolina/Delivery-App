@@ -23,7 +23,7 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
     this.app.use(route);
-    this.app.use('/images', express.static(path.join(__dirname, '../../assets/images/public')));
+    this.app.use('/images', express.static(path.join(__dirname, '../assets/public/images')));
   }
 
   public start(PORT: string | number): void {
