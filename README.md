@@ -7,6 +7,8 @@ Bem-vindo ao repositório do **Delivery App**! Este projeto é uma aplicação c
 - Frontend: React.js com Typescript
 - Conteinerização: Docker
 
+![](/App.gif)
+
 ## Índice
 
 - [Instalação](#instalação)
